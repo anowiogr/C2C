@@ -1,9 +1,9 @@
 <?php
-include_once "constant/header.php";
-require "scripts/connect.php";
+include_once "../main/header.php";
+include_once "../../model/auctionModel.php";
+$model = new Auction();
+
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if(isset($_SESSION['info']) && $_SESSION['info']<> null){
 
@@ -13,16 +13,9 @@ try {
 
     if (isset($_GET['auction_id'])) {
         $auctionId = $_GET['auction_id'];
-
+        
         // Pobranie informacji o wybranej aukcji
-        $query = "SELECT a.*, u.login, u.phone, c.currency_name FROM auctions a
-                  LEFT JOIN accounts u ON a.accountid = u.accountid
-                  LEFT JOIN currency c ON a.currencyid = c.currencyid
-                  WHERE a.auctionid = :auctionId";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':auctionId', $auctionId, PDO::PARAM_INT);
-        $stmt->execute();
-        $auction = $stmt->fetch(PDO::FETCH_ASSOC);
+        $auction = $model -> getAuctionById($auctionId);
 
         if ($auction) {
             ?>
@@ -36,7 +29,7 @@ try {
                 </div>
                 <div class="row col-md-11">
                     <div class="col-md-6">
-                        <img class="fill" src="images/nofoto.jpg" />
+                        <img class="fill" src="../../images/nofoto.jpg" />
                     </div>
 
                     <div class="p-3 mb-2 col-md-6" style="text-align: right;">
@@ -98,15 +91,7 @@ try {
                     $searchbar="'%".$_SESSION["filter"]["search"]."%'";
                     print_r($searchbar."<br>");
 
-                    $query = "SELECT * FROM auctions a
-                                LEFT JOIN accounts u ON a.accountid = u.accountid 
-                                LEFT JOIN currency c ON a.currencyid = c.currencyid
-                                WHERE a.selled = 0 AND a.veryfied = 1 
-                                AND a.title LIKE :searchbar
-                                OR a.description LIKE :searchbar";
-                    $stmt = $pdo->prepare($query);
-                    $stmt->bindParam(':searchbar', $searchbar);
-                    $stmt->execute();
+                    $stmt = $model -> getAuctionBySearch($searchbar);
 
                     $_SESSION["filter"]["search"]=null;
 
@@ -116,24 +101,13 @@ try {
                     $categoryid = $_SESSION["filter"]["categoryid"];
                     //print_r($categoryid . "<br>");
 
-                    $query = "SELECT * FROM auctions a
-                                LEFT JOIN accounts u ON a.accountid = u.accountid 
-                                LEFT JOIN currency c ON a.currencyid = c.currencyid
-                                WHERE a.selled = 0 AND a.veryfied = 1 
-                                AND a.categoryid = :categoryid";
-                    $stmt = $pdo->prepare($query);
-                    $stmt->bindParam(':categoryid', $categoryid);
-                    $stmt->execute();
+                    $stmt = $model -> getAuctionByCategory($categoryid);
+
                     $_SESSION["filter"]["categoryid"]=null;
 
                 } else {
-                    $query = "SELECT * FROM auctions a
-                                LEFT JOIN accounts u ON a.accountid = u.accountid 
-                                LEFT JOIN currency c ON a.currencyid = c.currencyid
-                            WHERE a.selled = 0 AND a.veryfied = 1";
-                    $stmt = $pdo->query($query);
+                    $stmt = $model -> getAllAuction();
                 }
-
                 $auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($auctions as $auction) {
@@ -167,5 +141,5 @@ try {
     die("Błąd połączenia lub tworzenia bazy danych: " . $e->getMessage());
 }
 
-require 'constant/footer.php';
+require '../main/footer.php';
 ?>

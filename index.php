@@ -45,7 +45,7 @@ if(isset($_SESSION["success"]) && $_SESSION["success"]<>null){
 
                             <h1>{$title}</h1>
 
-                            <p><a class="btn btn-lg btn-secondary" href="auction.php?auction_id={$auctionid}">Zobacz ofertę</a></p>
+                            <p><a class="btn btn-lg btn-secondary" href="mvc/view/auctions/auction.php?auction_id={$auctionid}">Zobacz ofertę</a></p>
                             
                         </div>
                     </div>
@@ -68,7 +68,7 @@ if(isset($_SESSION["success"]) && $_SESSION["success"]<>null){
         $categoryid = (int) $categories['categoryid'];
         echo <<< TABLECATEGORY
             <div class="col-lg-4">
-                <a class="text-dark" style="text-decoration: none;" href="scripts/forward.php?categoryid={$categoryid}">
+                <a class="text-dark" style="text-decoration: none;" href="mvc/controller/forward.php?categoryid={$categoryid}">
                     <svg class="bd-placeholder-img rounded-circle" width="60" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
                     <h2 class="fw-normal">{$name}</h2>
                 </a>

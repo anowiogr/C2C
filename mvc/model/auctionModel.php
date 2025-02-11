@@ -11,12 +11,14 @@ class Auction {
     }
 
     // Pobranie wszystkich aukcji
-   public function getAllAuction($selled = 0, $veryfied = 1){
-    $query = "SELECT * FROM auctions WHERE selled = :selled AND veryfied = :veryfied";
+   public function getAllAuction(){
+    $query = "SELECT * FROM auctions a
+                LEFT JOIN accounts u ON a.accountid = u.accountid 
+                LEFT JOIN currency c ON a.currencyid = c.currencyid
+                WHERE a.selled = 0 AND a.veryfied = 1";
     $stmt = $this->db->query($query);
-    $stmt->bindParam(':selled', $selled, PDO::PARAM_INT);
-    $stmt->bindParam(':veryfied', $veryfied, PDO::PARAM_INT);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute();
+    return $stmt;
    }
 
    // Pobranie wszystkich aukcji
@@ -54,6 +56,31 @@ class Auction {
     }
 
     // Wyszukiwanie listy po frazie
+    public function getAuctionBySearch($searchbar) {
+    $query = "SELECT * FROM auctions a
+                                LEFT JOIN accounts u ON a.accountid = u.accountid 
+                                LEFT JOIN currency c ON a.currencyid = c.currencyid
+                                WHERE a.selled = 0 AND a.veryfied = 1 
+                                AND a.title LIKE :searchbar
+                                OR a.description LIKE :searchbar";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':searchbar', $searchbar);
+    $stmt->execute();
+    return $stmt;
+    }
+
+    // Wyszukiwanie listy po frazie
+    public function getAuctionByCategory($searchbar) {
+        $query = "SELECT * FROM auctions a
+                                LEFT JOIN accounts u ON a.accountid = u.accountid 
+                                LEFT JOIN currency c ON a.currencyid = c.currencyid
+                                WHERE a.selled = 0 AND a.veryfied = 1 
+                                AND a.categoryid = :categoryid";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':categoryid', $categoryid);
+    $stmt->execute();
+    return $stmt;
+    }
 
     // Dodawanie nowej aukcji
     public function addAuction($title, $categoryid, $description, $used, $private, $price, $currencyid, $accountid) {
