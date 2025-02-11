@@ -55,16 +55,16 @@
         ?>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/userauctions.php'?>">Twoje aukcje</a>
+                                <a class="nav-link" href="mvc/view/auctions/userauctions.php">Twoje aukcje</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/messagelist.php'?>">Wiadomości</a>
+                                <a class="nav-link" href="mvc/view/messages/messagelist.php">Wiadomości</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/userabout.php';?>">Ustawienia</a>
+                                <a class="nav-link" href="mvc/view/users/userabout.php">Ustawienia</a>
                             </li>
                             <li class="nav-item active">
-                                <a href="<?php echo $config['baseurl'].'/mvc/controller/logout.php';?>"><button type="button" class="btn btn-danger">Wyloguj</button></a>
+                                <a href="mvc/controller/logout.php"><button type="button" class="btn btn-danger">Wyloguj</button></a>
                             </li>
                         </ul>
 
@@ -74,19 +74,19 @@
 
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/userauctions.php';?>">Twoje aukcje</a>
+                                    <a class="nav-link" href="mvc/view/auctions/userauctions.php">Twoje aukcje</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/messagelist.php'?>">Wiadomości</a>
+                                    <a class="nav-link" href="mvc/view/messages/messagelist.php">Wiadomości</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/admin.php'?>">Administracja</a>
+                                    <a class="nav-link" href="mvc/view/administrativs/admin.php">Administracja</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/userabout.php';?>">Ustawienia</a>
+                                    <a class="nav-link" href="mvc/view/users/userabout.php">Ustawienia</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a href="<?php echo $config['baseurl'].'/mvc/controller/logout.php'; ?>"><button type="button" class="btn btn-danger">Wyloguj</button></a>
+                                    <a href="mvc/controller/logout.php"><button type="button" class="btn btn-danger">Wyloguj</button></a>
                                 </li>
                             </ul>
 
