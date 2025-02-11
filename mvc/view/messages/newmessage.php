@@ -1,12 +1,13 @@
 <?php
-require 'constant/header.php';
-require 'scripts/connect.php';
+include_once '../main/header.php';
+include_once '../../model/messageModel.php';
+$model = new Message();
 ?>
     <table class="table">
         <tr>
             <td>
                 <div class="row col-md-1">
-                    <button style="border: 0px;" onclick="goBack()">
+                    <button style="border: 0px;" onclick="history.back()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="dark" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
@@ -21,29 +22,23 @@ require 'scripts/connect.php';
             <td>
 <?php
     if(!isset($_SESSION["logged"]["account_id"]) || $_SESSION["logged"]["account_id"]==null){
-        header('Location: index.php');
+        header('Location: ../../../index.php');
         exit();
     }
 
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        
         $account_id=$_SESSION["logged"]["account_id"];
         $auctionid=$_GET['auction_id'];
         $description='';
 
-        $query = "SELECT title FROM auctions WHERE auctionid = :auctionId";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':auctionId', $auctionid, PDO::PARAM_INT);
-        $stmt->execute();
-        $auction = $stmt->fetch(PDO::FETCH_ASSOC);
+        $auction = $model -> messageTitle($auctionid);
 
         //print_r($_SESSION["logged"]["account_id"]);
     if($auction){
     // Wyświetlanie formularza dodawania nowego ogłoszenia
     echo <<<TABLEFORM
-         <form method='POST' action='scripts/message.php'>
+         <form method='POST' action='../../controller/message.php'>
           <div class="form-row p-3">
          <label for='title'>Tytuł:</label><br>
          <input class="form-control" type='text' name='title' id='title' value='$auction[title]' disabled><br>
@@ -74,5 +69,5 @@ require 'scripts/connect.php';
     </tr>
     </table>
 <?php
-include_once "constant/footer.php";
+include_once "../main/footer.php";
 ?>

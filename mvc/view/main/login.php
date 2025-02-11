@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $config = include 'C:/xampp/htdocs/c2c/config/config.php';
+  $config = include 'C:/xampp/htdocs/inż/c2c/config/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,19 +10,19 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta name="description"
-        content="Strona stworzona w celach nauki programowania www. Studencki OLX to strona stworzona, aby przećwiczyć tworzenie kodu w HTML|PHP|JavaScript w powiązaniu z SQL.">
+        content="Strona stworzona w celach nauki programowania www. Studencki C2C to strona stworzona, aby przećwiczyć tworzenie kodu w HTML|PHP|JavaScript w powiązaniu z SQL.">
   <link rel="icon"
         type="image/png" href="<?php echo $config['baseurl'].'/images/icon.png'; ?>">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-  <link rel="stylesheet" href="<?php echo $config['baseurl'].'/public/plugins/fontawesome-free/css/all.min.css'; ?>">
+  <link rel="stylesheet" href="<?php echo $config['baseurl'].'public/plugins/fontawesome-free/css/all.min.css'; ?>">
 
   <link rel="stylesheet" href="<?php echo $config['baseurl'].'public/plugins/icheck-bootstrap/icheck-bootstrap.min.css';?>">
 
-  <link rel="stylesheet" href="<?php echo $config['baseurl'].'/public/dist/css/adminlte.min.css';?>">
+  <link rel="stylesheet" href="<?php echo $config['baseurl'].'public/dist/css/adminlte.min.css';?>">
 
-  <title>Studencki OLX</title>
+  <title>Studencki C2C</title>
  </head>
 
 <body class="hold-transition login-page">

@@ -43,10 +43,10 @@
                 ?>
                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="<?php echo $config['baseurl'].'/mvc/view/main/login.php';?>"><button type="button" class="btn btn-outline-light me-2">Zaloguj</button></a>
+                            <a href="<?php echo 'mvc/view/main/login.php';?>"><button type="button" class="btn btn-outline-light me-2">Zaloguj</button></a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo $config['baseurl'].'/mvc/view/main/register.php'; ?>"><button type="button" class="btn btn-light">Zarejestruj się</button></a>
+                            <a href="<?php echo 'mvc/view/main/register.php'; ?>"><button type="button" class="btn btn-light">Zarejestruj się</button></a>
                         </li>
                     </ul>
 
