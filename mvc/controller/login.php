@@ -8,16 +8,16 @@ foreach ($_POST as $value){
 		exit();
 	}
 }
-$config = include 'C:/xampp/htdocs/c2c/config/config.php';
-require_once $config['baseurl'].'/mvc/model/userModel.php';
+$config = include 'C:/xampp/htdocs/inż/c2c/config/config.php';
+include_once '../model/userModel.php';
 
 try {
-	$connect = new userModel();
-    $connect -> veryfiyUser($_POST["login"], $_POST["email"]);
+	$model = new User();
+    $connect = $model -> veryfiyUser($_POST["email"], $_POST["email"]);
 
 	if ($connect->num_rows != 0){
 
-		$user = $connect->fetch_assoc();
+		$user = $connect->fetchAll(PDO::FETCH_ASSOC);
 		$stmt->close();
 
         $pass = password_hash($_POST["pass"], PASSWORD_ARGON2ID);

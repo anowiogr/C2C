@@ -51,10 +51,10 @@ ERROR;
   <!-- /.login-logo -->
   <div class="card card-outline card-secondary">
     <div class="card-header text-center">
-      <a href="<?php echo $config['baseurl'].'/index.php';?>" class="h1"><b>Studencki</b>OLX</a>
+      <a href="<?php echo $config['baseurl'].'/index.php';?>" class="h1"><b>Studencki</b>C2C</a>
     </div>
     <div class="card-body">
-      <form action="<?php echo $config['baseurl'].'/mvc/controller/login.php';?>" method="post">
+      <form action="../../controller/login.php" method="post">
         <div class="input-group mb-3">
           <input class="form-control" placeholder="Podaj login lub email" name="email">
           <div class="input-group-append">

@@ -38,10 +38,11 @@ class User {
     //Weryfikacja usera
     public function veryfiyUser($login, $email){
         $query = "SELECT * FROM accounts WHERE login = :login OR email = :email";
-        $stmt = $conn->prepare($query);
-	    $stmt->bind_param(':login', $login);
-        $stmt->bind_param(':email', $email);
-	    $stmt->execute();
+        $stmt = $this->db->prepare($query);
+	    $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // Dodanie usera
