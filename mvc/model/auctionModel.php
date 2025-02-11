@@ -54,7 +54,8 @@ class Auction {
     public function getCurrencies() {
     $query = "SELECT * FROM currency";
     $stmt = $this->db->query($query);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->execute();
+    return $stmt;
     }
 
    // Pobieranie danych pojedynczej aukcji

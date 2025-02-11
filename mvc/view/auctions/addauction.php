@@ -1,18 +1,19 @@
 <?php
 
-$config = include 'C:/xampp/htdocs/c2c/config/config.php';
-require $config['basedir'].'/mvc/view/main/header.php';
-require $config['basedir'].'/mvc/model/databaseConnection.php';
+$config = include 'C:/xampp/htdocs/inż/C2C/config/config.php';
+require '../main/header.php';
+require '../../model/auctionModel.php';
+$model = new Auction();
 
 $used = false;
-$private = false;
+$private = true;
 
 
 $account_id = $_SESSION["logged"]["account_id"];
 
 
 ?>
-         <form method='POST' action='<?php echo $config['baseurl'].'/newauction.php';?>'>
+         <form method='POST' action='../../controller/newauction.php'>
          <table class="table">
             <tbody>
             <tr>
@@ -24,10 +25,9 @@ $account_id = $_SESSION["logged"]["account_id"];
                 <td>
                     <select class="form-control" name='categoryid' id='categoryid' required>
                     <?php
-                      $query = "SELECT * FROM category";
-                      $stmt = $pdo->query($query);
+                      $stmt = $model -> getCategories();
                       $category1 = $stmt->fetchAll();
-                      //print_r($category);
+
                       foreach ($category1 as $category){
                         echo "<option value='$category[categoryid]'>$category[name]</option>";
                       }
@@ -44,10 +44,6 @@ $account_id = $_SESSION["logged"]["account_id"];
                 <td><input class="form-check-input" type='checkbox' name='used' id='used' > </td>
             </tr>
             <tr>
-                <td><label class="form-check-label"for='private'>Prywatny:</label></td>
-                <td><input class="form-check-input" type='checkbox' name='private' id='private' ></td>
-            </tr>
-            <tr>
                 <td colspan="2">Cena:</td>
             </tr>
 
@@ -55,9 +51,8 @@ $account_id = $_SESSION["logged"]["account_id"];
                 <td><input class="form-control" type='text' pattern="\d*" name='price' id='price' required></td>
                 <td><select class="form-control" name='currencyid' id='currencyid' required>
                         <?php
-                        $query = "SELECT * FROM currency";
-                        $stmt = $pdo->query($query);
-                        $currency1 = $stmt->fetchAll();
+                        $stmt = $model -> getCurrencies();
+                        $currency1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($currency1 as $currency){
                             echo "<option value='$currency[currencyid]'>$currency[currency_name]</option>";
                         }
@@ -79,5 +74,5 @@ $account_id = $_SESSION["logged"]["account_id"];
 
 
 <?php
-include_once "constant/footer.php";
+include_once "../main/footer.php";
 ?>
