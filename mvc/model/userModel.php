@@ -91,7 +91,7 @@ class User {
 
     // Zmiana hasła usera
     public function updatePassword($login, $email, $newPassword) {
-        $stmt = $this->pdo->prepare("UPDATE accounts SET password = :password WHERE login = :login AND email = :email");
+        $stmt = $this->db->prepare("UPDATE accounts SET password = :password WHERE login = :login AND email = :email");
         $hashedPassword = password_hash($newPassword, PASSWORD_ARGON2ID);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':login', $login);

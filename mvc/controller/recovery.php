@@ -11,24 +11,18 @@ session_start();
         }
     }
 
-require_once "connect.php";
+require_once '../model/userModel.php';
+$model = new User();
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
     if($_POST["pass1"]==$_POST["pass2"]){
 
-        $pass = password_hash($_POST["pass1"], PASSWORD_ARGON2ID);
-
-        $stmt = $pdo->prepare("UPDATE accounts SET password = :paswd WHERE login= :login AND email = :email");
-        $stmt->bindParam(':paswd', $pass);
-        $stmt->bindParam(':login', $_POST["login"]);
-        $stmt->bindParam(':email', $_POST["email"]);
-        $stmt->execute();
+        $stmt = $model -> updatePassword( $_POST["login"],$_POST["email"],$_POST["pass1"]);
 
         $_SESSION["succes"] = "Hasło zostało zmienione";
-        header("location: ../login.php");
+        header("location: ../view/main/login.php");
 
 
     } else {
