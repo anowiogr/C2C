@@ -1,7 +1,7 @@
 <?php
 
 // header
-include_once __DIR__."/mvc/view/main/header.php";
+include_once "mvc/view/main/header.php";
 include_once 'mvc/model/auctionModel.php';
 $model = new Auction();
 
@@ -34,17 +34,18 @@ if(isset($_SESSION["success"]) && $_SESSION["success"]<>null){
         <?php
 
             $auctions = $model -> getBannerAuction();
-            //var_dump($auction = $model -> getBannerAuction());
             while($auction = $auctions->fetch(PDO::FETCH_ASSOC)) {
+                $title = htmlspecialchars($auction['title']);
+                $auctionid = (int) $auction['auctionid'];
                 echo <<< TABLEAUCTION
                 <div class="carousel-item p-3">
                     <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
                     <div class="container">
                         <div class="carousel-caption" padding="10%">
 
-                            <h1>$auction['title']</h1>
+                            <h1>{$title}</h1>
 
-                            <p><a class="btn btn-lg btn-secondary" href="auction.php?auction_id=$auction['auctionid']">Zobacz ofertę</a></p>
+                            <p><a class="btn btn-lg btn-secondary" href="auction.php?auction_id={$auctionid}">Zobacz ofertę</a></p>
                             
                         </div>
                     </div>
@@ -61,23 +62,25 @@ if(isset($_SESSION["success"]) && $_SESSION["success"]<>null){
 
 <div class="row p-4 text-center">
 <?php
-
-    while ($category= $model->getCategories()) {
+    $category= $model->getCategories();
+    while ($categories = $category->fetch(PDO::FETCH_ASSOC)) {
+        $name = htmlspecialchars($categories['name']);
+        $categoryid = (int) $categories['categoryid'];
         echo <<< TABLECATEGORY
             <div class="col-lg-4">
-                <a class="text-dark" style="text-decoration: none;" href="scripts/forward.php?categoryid=$category[categoryid]">
+                <a class="text-dark" style="text-decoration: none;" href="scripts/forward.php?categoryid={$categoryid}">
                     <svg class="bd-placeholder-img rounded-circle" width="60" height="60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-                    <h2 class="fw-normal">$category[name]</h2>
+                    <h2 class="fw-normal">{$name}</h2>
                 </a>
             </div>
             
         TABLECATEGORY;
         echo '<br>';
     }
-
-?></div>
-
+?>
+</div>
+<?php
 //stopka
-include_once __DIR__."/mvc/view/main/footer.php";
+include_once "mvc/view/main/footer.php";
 
 ?>

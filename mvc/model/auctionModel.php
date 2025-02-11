@@ -31,7 +31,7 @@ class Auction {
     $query = "SELECT categoryid, name FROM category";
     $stmt = $this->db->query($query);
     $stmt->execute();
-	return $result = $stmt->get_result();
+	return $stmt;
 
     }
 

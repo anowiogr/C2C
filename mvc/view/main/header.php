@@ -1,6 +1,6 @@
 <?php
 
-    $config = include 'C:/xampp/htdocs/c2c/config/config.php';
+    $config = include 'C:/xampp/htdocs/inż/C2C/config/config.php';
 
     session_start();
     //print_r($_SESSION["logged"]);
