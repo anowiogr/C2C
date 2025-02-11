@@ -1,28 +1,18 @@
 <?php
-require 'constant/header.php';
-require 'scripts/connect.php';
+require '../main/header.php';
+require '../../model/userModel.php';
+$model = new User();
 
 if (!isset($_SESSION['logged']['account_id'])) {
-    header('Location: login.php');
+    header('Location: ../../../login.php');
     exit();
 }
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $accountId = $_SESSION['logged']['account_id'];
 
     // Pobranie istniejących informacji o użytkowniku
-    $query = "SELECT accounts.*, type.type_name,
-                CASE WHEN accounts.verified = 1 THEN 'TAK' ELSE 'NIE' END as verifiedtext
-              FROM accounts
-              LEFT JOIN type ON accounts.account_type = type.type_id
-              WHERE accounts.accountid = :accountid";
-    $statement = $pdo->prepare($query);
-    $statement->bindParam(':accountid', $accountId);
-    $statement->execute();
-
+    $statement = $model -> getUserById($accountId);
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
@@ -136,5 +126,5 @@ try {
     echo "Błąd połączenia: " . $e->getMessage();
 }
 
-require 'constant/footer.php';
+require '../main/footer.php';
 ?>

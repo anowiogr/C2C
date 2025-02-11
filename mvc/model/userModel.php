@@ -30,9 +30,9 @@ class User {
                   LEFT JOIN type ON accounts.account_type = type.type_id
                 WHERE accounts.accountid = :accountid";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':accountid', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':accountid', $accountid, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
     //Weryfikacja usera
