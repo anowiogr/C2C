@@ -4,7 +4,7 @@
 
   if (!isset($_SESSION["logged"]) || session_status() != 2){
     $_SESSION["role"] = "guest";
-    header("location: index.php");
+    header("location: ../../index.php");
   }else{
     switch ($_SESSION["logged"]["account_type"]){
       case 101:
@@ -15,7 +15,7 @@
 		    break;
     }
 
-    header("location: index.php");
+    header("location: ../../index.php");
   }
 
 if (isset($_SESSION["logged"]["last_activity"])) {
@@ -30,7 +30,7 @@ if (isset($_SESSION["logged"]["last_activity"])) {
     //echo "Sesja nieaktywna";
     $_SESSION["error"] = "Sesja zakończona, zaloguj się ponownie";
     $role = "guest";
-    header("location: index.php");
+    header("location: ../../index.php");
 
   }
 

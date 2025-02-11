@@ -15,10 +15,9 @@ try {
 	$model = new User();
     $connect = $model -> veryfiyUser($_POST["email"], $_POST["email"]);
 
-	if ($connect->num_rows != 0){
+	if ($connect){
 
-		$user = $connect->fetchAll(PDO::FETCH_ASSOC);
-		$stmt->close();
+		$user = $connect;
 
         $pass = password_hash($_POST["pass"], PASSWORD_ARGON2ID);
 
@@ -32,7 +31,7 @@ try {
                 $_SESSION["logged"]["account_type"] = $user["account_type"];
                 $_SESSION["logged"]["last_activity"] = time();
                 //print_r($_SESSION["logged"]);
-                header("location: ../logged.php");
+                header("location: ./logged.php");
             } else {
                 $_SESSION["error"] = "Nie udało się zalogować!";
                 echo "<script>history.back();</script>";
