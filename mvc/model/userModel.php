@@ -32,7 +32,7 @@ class User {
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':accountid', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //Weryfikacja usera

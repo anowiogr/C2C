@@ -21,10 +21,23 @@ class Auction {
     return $stmt;
    }
 
-   // Pobranie wszystkich aukcji
+   // Pobranie aukcji do banneru
    public function getBannerAuction(){
     $query = "SELECT title, auctionid FROM auctions WHERE selled = 0 AND veryfied = 1 ORDER BY auctionid DESC LIMIT 4";
     $stmt = $this->db->query($query);
+    return $stmt;
+   }
+
+     // Pobranie wszystkich aukcji
+   public function getAllAuction4User($userid){
+    $query = "SELECT auctions.*, accounts.accountid, category.name AS category_name, auctions.veryfied
+              FROM auctions
+              INNER JOIN accounts ON auctions.accountid = accounts.accountid
+              LEFT JOIN category ON auctions.categoryid = category.categoryid
+              WHERE accounts.accountid = :accountid AND auctions.veryfied <> 2 AND auctions.selled = 0";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':accountid', $accountId);
+    $stmt->execute();
     return $stmt;
    }
 

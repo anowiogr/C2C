@@ -1,8 +1,9 @@
 <?php
-include_once "constant/header.php";
-require 'scripts/connect.php';
-
-
+include_once "../main/header.php";
+include_once "../../model/userModel.php";
+include_once "../../model/auctionModel.php";
+$model = new User();
+$auctionmodel = new Auction();
 
 if (isset($_GET['account_id'])) {
     $accountId = $_GET['account_id'];
@@ -10,36 +11,16 @@ if (isset($_GET['account_id'])) {
     $accountId = $_SESSION['logged']['account_id'];
 } else {
 
-    header('Location: index.php');
+    header('Location: ../../../index.php');
     exit();
 }
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Pobranie nazwy użytkownika
-    $query = "SELECT firstname, lastname FROM accounts WHERE accountid = :accountid";
-    $statement = $pdo->prepare($query);
-    $statement->bindParam(':accountid', $accountId);
-    $statement->execute();
-
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        $username = $user['firstname'] . ' ' . $user['lastname'];
+    if($accountId){
+        echo "<div><a href='addauction.php' class='button'><button class='btn btn-secondary'>Dodaj ogłoszenie</button></a></div><br>";
     }
-    echo "<div><a href='addauction.php' class='button'><button class='btn btn-secondary'>Dodaj ogłoszenie</button></a></div><br>";
 
     // Pobranie wszystkich ogłoszeń użytkownika
-    $query = "SELECT auctions.*, accounts.accountid, category.name AS category_name, auctions.veryfied
-              FROM auctions
-              INNER JOIN accounts ON auctions.accountid = accounts.accountid
-              LEFT JOIN category ON auctions.categoryid = category.categoryid
-              WHERE accounts.accountid = :accountid AND auctions.veryfied <> 2 AND auctions.selled = 0";
-    $statement = $pdo->prepare($query);
-    $statement->bindParam(':accountid', $accountId);
-    $statement->execute();
-
+    $statement = $auctionmodel -> getAllAuction4User($accountId);
     $auctions = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if ($auctions) {
@@ -137,5 +118,5 @@ try {
     echo "Błąd połączenia: " . $e->getMessage();
 }
 
-require 'constant/footer.php';
+require '../main/footer.php';
 ?>
