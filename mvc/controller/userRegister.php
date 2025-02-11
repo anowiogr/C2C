@@ -1,5 +1,8 @@
 <?php
 session_start();
+include_once '../model/userModel.php';
+
+$model = new User();
 
 foreach ($_POST as $value){
 	if (empty($value)){
@@ -8,7 +11,7 @@ foreach ($_POST as $value){
 		exit();
 	}
 }
-require_once "connect.php";
+
 
 $error = 0;
 if (!isset($_POST["terms"])){
@@ -35,14 +38,11 @@ if ($error != 0){
 
 try {
 
-    $stmt = $conn -> prepare("INSERT INTO `accounts` (`firstname`, `lastname`, `email`,`login`, `password`, `verified`) VALUES (?, ?, ?, ?,?, 0 );");
-    $pass = password_hash($_POST["pass1"], PASSWORD_ARGON2ID);
-    $stmt->bind_param("sssss",  $_POST["firstName"], $_POST["lastName"], $_POST["email1"],$_POST["nick"], $pass );
-    $stmt->execute();
+    $stmt = $model -> insertUser($_POST["firstName"], $_POST["lastName"], $_POST["email1"],$_POST["nick"], $_POST["pass1"]);
 
-	if ($stmt->affected_rows != 0){
+	if ($stmt){
 		$_SESSION["success"] = "Zostałeś zarejestrowany, poczekaj na weryfikację administratora";
-		header("location: ../");
+		header("location: ../../");
 	}
 } catch (mysqli_sql_exception $e) {
 		$_SESSION["error"] = $e->getMessage();

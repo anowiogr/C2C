@@ -46,18 +46,16 @@ class User {
     }
 
     // Dodanie usera
-    public function insertUser($firstname, $lastname, $email, $phone, $address, $codezip, $city, $contury){
-        $query = "INSERT INTO accounts (firstname, lastname, email, phone, address, codezip, city, contury)
-                VALUES (:firstname, :lastname, :email, :phone, :address, :codezip, :city, :contury)";
+    public function insertUser($firstname, $lastname, $email,$login, $password){
+        $query = "INSERT INTO accounts (firstname, lastname, email,login, password, verified)
+                VALUES (:firstname, :lastname, :email,:login, :password, 0)";
+        $pass = password_hash($password, PASSWORD_ARGON2ID);
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':firstname', $firstname);
-        $stmt->bindParam(':listname', $lastname);
+        $stmt->bindParam(':lastname', $lastname);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':phone', $phone);
-        $stmt->bindParam(':address', $address);
-        $stmt->bindParam(':codezip', $codezip);
-        $stmt->bindParam(':city', $city);
-        $stmt->bindParam(':contury', $contury);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':password', $pass);
         return $stmt->execute();
     }
 
