@@ -12,15 +12,15 @@
   <meta name="description"
         content="Strona stworzona w celach nauki programowania www. Studencki C2C to strona stworzona, aby przećwiczyć tworzenie kodu w HTML|PHP|JavaScript w powiązaniu z SQL.">
   <link rel="icon"
-        type="image/png" href="<?php echo $config['baseurl'].'/images/icon.png'; ?>">
+        type="image/png" href="../../../images/icon.png">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-  <link rel="stylesheet" href="<?php echo $config['baseurl'].'public/plugins/fontawesome-free/css/all.min.css'; ?>">
+  <link rel="stylesheet" href="../../../public/plugins/fontawesome-free/css/all.min.css">
 
-  <link rel="stylesheet" href="<?php echo $config['baseurl'].'public/plugins/icheck-bootstrap/icheck-bootstrap.min.css';?>">
+  <link rel="stylesheet" href="../../../public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
-  <link rel="stylesheet" href="<?php echo $config['baseurl'].'public/dist/css/adminlte.min.css';?>">
+  <link rel="stylesheet" href="../../../public/dist/css/adminlte.min.css">
 
   <title>Studencki C2C</title>
  </head>
@@ -51,7 +51,7 @@ ERROR;
   <!-- /.login-logo -->
   <div class="card card-outline card-secondary">
     <div class="card-header text-center">
-      <a href="<?php echo $config['baseurl'].'/index.php';?>" class="h1"><b>Studencki</b>C2C</a>
+      <a href="../../../index.php" class="h1"><b>Studencki</b>C2C</a>
     </div>
     <div class="card-body">
       <form action="../../controller/login.php" method="post">
@@ -97,10 +97,10 @@ ERROR;
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="<?php echo $config['baseurl'].'/public/plugins/jquery/jquery.min.js';?>"></script>
+<script src="../../../public/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="<?php echo $config['baseurl'].'/public/plugins/bootstrap/js/bootstrap.bundle.min.js';?>"></script>
+<script src="../../../public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo $config['baseurl'].'/public/dist/js/adminlte.min.js';?>"></script>
+<script src="../../../public/dist/js/adminlte.min.js"></script>
 </body>
 </html>
