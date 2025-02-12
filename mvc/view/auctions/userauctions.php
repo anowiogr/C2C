@@ -22,7 +22,6 @@ try {
     // Pobranie wszystkich ogłoszeń użytkownika
     $statement = $auctionmodel -> getAllAuction4User($accountId);
     $auctions = $statement->fetchAll(PDO::FETCH_ASSOC);
-
     if ($auctions) {
         foreach ($auctions as $auction) {
             if($auction["veryfied"]==0){
@@ -66,16 +65,8 @@ try {
         echo "<hr><h4>NIEAKTYWNE</h4>";
 
             // Pobranie nieaktywnych ogłoszeń użytkownika
-    $query = "SELECT auctions.*, accounts.accountid, category.name AS category_name
-              FROM auctions
-              INNER JOIN accounts ON auctions.accountid = accounts.accountid
-              LEFT JOIN category ON auctions.categoryid = category.categoryid
-              WHERE accounts.accountid = :accountid AND auctions.veryfied = 2 OR auctions.selled <> 0";
-    $statement = $pdo->prepare($query);
-    $statement->bindParam(':accountid', $accountId);
-    $statement->execute();
-
-    $auctions = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $statement = $auctionmodel -> getAllAuction4UserUnactive($accountId);
+            $auctions = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if ($auctions) {
         foreach ($auctions as $auction) {

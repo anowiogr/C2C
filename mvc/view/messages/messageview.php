@@ -1,26 +1,17 @@
 <?php
-require "constant/header.php";
-require 'scripts/connect.php';
+include_once "../main/header.php";
+include_once "../../model/messageModel.php";
+$model = new Message();
 
 if (!isset($_SESSION['logged']['account_id'])||$_SESSION['logged']['account_id']==null) {
-    header("Location: index.php");
+    header("Location: ../../../index.php");
 
 }
 $account_id = $_SESSION['logged']['account_id'];
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->exec("USE $dbname");
-
-
-    // Zapytanie dla wiadomości (tresc)
-    $query = "SELECT id, answer, date, description FROM message 
-                        WHERE auctionid = :auctionid AND buyerid= :buyerid;";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':auctionid', $_GET['aid']);
-    $stmt->bindParam(':buyerid', $_GET['bid']);
-    $stmt->execute();
+     // Zapytanie dla wiadomości (tresc)
+    $stmt = $model -> getMessages($_GET['aid'], $_GET['bid']);
 
 } catch (PDOException $e) {
     echo "Błąd połączenia lub aktualizacji bazy danych: " . $e->getMessage();
@@ -66,7 +57,7 @@ try {
                 echo <<<SENDMESS
                     <tr>
                         <td>
-                        <form method='POST' action='scripts/mesview.php'>
+                        <form method='POST' action='../../controller/mesview.php'>
                             <div class="form-row p-3" >
                                 <div style="width: 90%; float: left;">
                                     <textarea class="form-control" name='description' id='description' value='$description' required>$description</textarea><br>
@@ -93,6 +84,6 @@ try {
                 </table>
                 </div>
                     <?php
-                require 'constant/footer.php';
+                require '../main/footer.php';
                 ?>
 

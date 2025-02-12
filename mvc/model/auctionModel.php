@@ -28,8 +28,8 @@ class Auction {
     return $stmt;
    }
 
-     // Pobranie wszystkich aukcji
-   public function getAllAuction4User($userid){
+     // Pobranie wszystkich aukcji aktualnych
+   public function getAllAuction4User($accountId){
     $query = "SELECT auctions.*, accounts.accountid, category.name AS category_name, auctions.veryfied
               FROM auctions
               INNER JOIN accounts ON auctions.accountid = accounts.accountid
@@ -40,6 +40,19 @@ class Auction {
     $stmt->execute();
     return $stmt;
    }
+
+    // Pobranie wszystkich aukcji aktualnych
+    public function getAllAuction4UserUnactive($accountId){
+        $query = "SELECT auctions.*, accounts.accountid, category.name AS category_name, auctions.veryfied
+                  FROM auctions
+                  INNER JOIN accounts ON auctions.accountid = accounts.accountid
+                  LEFT JOIN category ON auctions.categoryid = category.categoryid
+                  WHERE accounts.accountid = :accountid AND auctions.veryfied = 2 AND auctions.selled = 0";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':accountid', $accountId);
+        $stmt->execute();
+        return $stmt;
+    }
 
     // Pobierz kategorie z bazy danych
     public function getCategories() {

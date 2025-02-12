@@ -47,7 +47,7 @@ class Message {
         $stmt->bindParam(':auctionid', $auctionid);
         $stmt->bindParam(':buyerid', $buyerid);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
 
