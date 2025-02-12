@@ -82,6 +82,17 @@ class Auction {
     return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Pobieranie danych pojedynczej aukcji
+   public function getAuctionByIdModify($auctionid) {
+    $stmt = $this->db->prepare("SELECT a.*, u.login, u.phone, c.currency_name FROM auctions a
+                                LEFT JOIN accounts u ON a.accountid = u.accountid
+                                LEFT JOIN currency c ON a.currencyid = c.currencyid
+                                WHERE a.auctionid = :auctionid");
+    $stmt->bindParam(':auctionid', $auctionid, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt;
+    }
+
     // Wyszukiwanie listy po frazie
     public function getAuctionBySearch($searchbar) {
     $query = "SELECT * FROM auctions a
@@ -126,12 +137,12 @@ class Auction {
     }
 
     // Modyfikowanie aukcji
-    public function updateAuction($title, $categoryid, $description, $used, $private, $price, $currencyid, $accountid, $auctionid) {
+    public function updateAuction($title, $categoryid, $description, $used, $private, $price, $currencyid, $auctionid) {
         $query = "UPDATE auctions 
                   SET title = :title, categoryid = :categoryid, 
                   description = :description, used = :used, 
                   private = :private, price = :price, 
-                  currencyid = :currencyid, accountid = :accountid 
+                  currencyid = :currencyid
                   WHERE auctionid = :auctionid;";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':title', $title);
@@ -141,7 +152,6 @@ class Auction {
         $stmt->bindParam(':private', $private, PDO::PARAM_BOOL);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':currencyid', $currencyid);
-        $stmt->bindParam(':accountid', $accountid);
         $stmt->bindParam(':auctionid', $auctionid);
         $stmt->execute();
     }
@@ -149,7 +159,7 @@ class Auction {
     // Usuwanie aukcji
     public function deleteAuction($auctionid) {
         $query = "DELETE FROM auctions WHERE auctionid = :auctionid";
-            $stmt = $pdo->prepare($query);
+            $stmt = $this->db->prepare($query);
             $stmt->bindParam(':auctionid', $auctionId);
             $stmt->execute();
         header("Location: ../view/userauctions.php");
