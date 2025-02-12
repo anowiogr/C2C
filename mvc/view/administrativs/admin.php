@@ -5,7 +5,7 @@ require_once __DIR__."/../../model/administrativeModel.php";
 require_once __DIR__."/../../model/auctionModel.php";
 
 $administratorPanel = new Administrative();
-
+$accountId = $_SESSION['logged']['account_id'];
 ?>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -44,8 +44,8 @@ $administratorPanel = new Administrative();
                          
                          <div style="overflow: hidden; text-align: right;">
                          <h3>$auction[price]</h3>$auction[currency_name]<br>
-                           <a href="scripts/modauction.php?auction_id=$auction[auctionid]&verifyed=true&id=$account_id" class="btn btn-success">Zatwierdź</a><!--wartość na 1-->
-                           <a  href="scripts/modauction.php?auction_id=$auction[auctionid]&verifyed=false&id=$account_id" class="btn btn-danger">Odrzuć</a> <!--wartość na 2-->
+                           <a href="scripts/modauction.php?auction_id=$auction[auctionid]&verifyed=true&id=$accountId" class="btn btn-success">Zatwierdź</a><!--wartość na 1-->
+                           <a  href="scripts/modauction.php?auction_id=$auction[auctionid]&verifyed=false&id=$accountId" class="btn btn-danger">Odrzuć</a> <!--wartość na 2-->
                          </div><div class="ainfo" style="text-align: left;" >$auction[city],  Data wystawienia: $auction[date_start] </div>
                        
                     </div>
@@ -81,8 +81,8 @@ $administratorPanel = new Administrative();
                                      
                                      <div style="overflow: hidden; text-align: right;">
                                        <p style="font-size: 0.7em;" > Data rejestracji: $newUser[registerdate] </p>
-                                       <a href="scripts/moduser.php?accountid=$newUser[accountid]&verifyed=true&id=$account_id" class="btn btn-success">Zatwierdź</a><!--wartość na 1-->
-                                       <a  href="scripts/moduser.php?accountid=$newUser[accountid]&verifyed=false&id=$account_id" class="btn btn-danger">Odrzuć</a> <!--wartość na 2-->
+                                       <a href="scripts/moduser.php?accountid=$newUser[accountid]&verifyed=true&id=$accountId" class="btn btn-success">Zatwierdź</a><!--wartość na 1-->
+                                       <a  href="scripts/moduser.php?accountid=$newUser[accountid]&verifyed=false&id=$accountId" class="btn btn-danger">Odrzuć</a> <!--wartość na 2-->
                                      </div>
                                      
                                    

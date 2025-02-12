@@ -22,7 +22,7 @@ class Message {
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':accountid', $account_id);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
     // -dla ofert kupna
@@ -35,7 +35,7 @@ class Message {
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':accountid', $account_id);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt;
 
     }
 

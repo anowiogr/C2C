@@ -1,40 +1,20 @@
 <?php
-require "constant/header.php";
-require 'scripts/connect.php';
+include_once "../main/header.php";
+include_once "../../model/messageModel.php";
+$model = new Message();
 
 if (!isset($_SESSION['logged']['account_id'])||$_SESSION['logged']['account_id']==null) {
-    header("Location: index.php");
+    header("Location: ../../../index.php");
 
 }
 $account_id = $_SESSION['logged']['account_id'];
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->exec("USE $dbname");
-
     //Zapytanie dla sprzedawanych przedmiotów (naglowek)
-    $querySell = "SELECT 
-    DISTINCT m.auctionid, m.buyerid, x.accountid as seller, a.login, x.title
-    FROM message m 
-     LEFT JOIN auctions x ON m.auctionid = x.auctionid
-     LEFT JOIN accounts a ON m.buyerid = a.accountid 
-   WHERE m.answer !=0 AND x.accountid = :accountid";
-    $stmtSell = $pdo->prepare($querySell);
-    $stmtSell->bindValue(':accountid', $account_id);
-    $stmtSell->execute();
+    $stmtSell = $model -> getSellMessages($account_id);
 
     // Zapytanie dla kupowanych (naglowek)
-    $queryBuy = "SELECT 
-    DISTINCT m.auctionid, m.buyerid, x.accountid as seller, a.login, x.title
-    FROM message m 
-     LEFT JOIN auctions x ON m.auctionid = x.auctionid
-     LEFT JOIN accounts a ON m.buyerid = a.accountid 
-   WHERE m.answer !=0 AND x.accountid <> :accountid";
-    $stmtBuy = $pdo->prepare($queryBuy);
-    $stmtBuy->bindParam(':accountid', $account_id);
-    $stmtBuy->execute();
-
+    $stmtBuy = $model -> getBuyMessages($account_id);
 
 } catch (PDOException $e) {
     echo "Błąd połączenia lub aktualizacji bazy danych: " . $e->getMessage();
@@ -133,5 +113,5 @@ try {
     </div>
 
 <?php
-include_once "constant/footer.php";
+include_once "../main/footer.php";
 ?>

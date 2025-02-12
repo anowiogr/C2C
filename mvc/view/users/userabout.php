@@ -84,28 +84,8 @@ try {
             $city = $_POST['city'];
             $country = $_POST['country'];
 
-            $updateQuery = "UPDATE accounts
-                            SET firstname = :firstname,
-                                lastname = :lastname,
-                                email = :email,
-                                phone = :phone,
-                                address = :address,
-                                codezip = :codezip,
-                                city = :city,
-                                country = :country
-                            WHERE accountid = :accountid";
-
-            $updateStatement = $pdo->prepare($updateQuery);
-            $updateStatement->bindParam(':firstname', $firstname);
-            $updateStatement->bindParam(':lastname', $lastname);
-            $updateStatement->bindParam(':email', $email);
-            $updateStatement->bindParam(':phone', $phone);
-            $updateStatement->bindParam(':address', $address);
-            $updateStatement->bindParam(':codezip', $codezip);
-            $updateStatement->bindParam(':city', $city);
-            $updateStatement->bindParam(':country', $country);
-            $updateStatement->bindParam(':accountid', $accountId);
-
+            $updateStatement = $model -> updateUser($accountId, $firstname, $lastname, $email, $phone, $address, $codezip, $city, $contury);
+            var_dump($updateStatement);
             $errorMessage = '';
 
             try {

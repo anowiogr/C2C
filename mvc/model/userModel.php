@@ -76,7 +76,7 @@ class User {
         $stmt->bindParam(':codezip', $codezip);
         $stmt->bindParam(':city', $city);
         $stmt->bindParam(':contury', $contury);
-        return $stmt->execute();
+        return $stmt;
     }
 
     // Oznaczenie usera jako usuniętego
