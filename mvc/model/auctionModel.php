@@ -162,10 +162,17 @@ class Auction {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':auctionid', $auctionId);
             $stmt->execute();
-        header("Location: ../view/userauctions.php");
     }
 
-
+    //Potwierdzenie aukcji
+    public function veryfyAuction($veryfied, $idadmina, $auctionid) {
+        $query = "UPDATE auctions SET veryfied = :idver, whover=:id WHERE auctionid = :auctionid;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':idver', $veryfied);
+        $stmt->bindParam(':id', $idadmina);
+        $stmt->bindParam(':auctionid', $auctionid);
+        $stmt->execute();
+    }
 }
 
 ?>

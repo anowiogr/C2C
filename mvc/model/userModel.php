@@ -98,5 +98,15 @@ class User {
         $stmt->bindParam(':email', $email);
         return $stmt->execute();
     }
+
+    //Potwieerdzienie użytkownika
+    public function veryfiyUserByAdmin($veryfied, $idadmina, $accountId){
+        $query = "UPDATE accounts SET verified = :idver, whover=:id WHERE accountid = :accountid;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':idver', $veryfied);
+        $stmt->bindParam(':id', $idadmina);
+        $stmt->bindParam(':accountid', $accountId);
+        $stmt->execute();
+    }
 }
 ?>
