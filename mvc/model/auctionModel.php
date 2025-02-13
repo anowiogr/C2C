@@ -173,6 +173,17 @@ class Auction {
         $stmt->bindParam(':auctionid', $auctionid);
         $stmt->execute();
     }
+
+    // Kupienie aukcji
+    public function buyAuction($buyerid, $auctionid) {
+        $query = "UPDATE auctions 
+                  SET buyerid = :buyerid, selled = 1
+                  WHERE auctionid = :auctionid;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':buyerid', $buyerid);
+        $stmt->bindParam(':auctionid', $auctionid);
+        $stmt->execute();
+    }
 }
 
 ?>

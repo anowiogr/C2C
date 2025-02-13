@@ -27,7 +27,7 @@ if(isset($_SESSION["success"]) && $_SESSION["success"]<>null){
             <div class="container">
                 <div class="carousel-caption">
                     <h1>KUPUJ I SPRZEDAWAJ JAK LUBISZ</h1>
-                    <p class="opacity-75">Studencki OLX to super sprawa dla każdego początkującego przedsięciorcy, już dziś zaloguj się i zarób hajsik na cokolwiek chcesz :)</p>
+                    <p class="opacity-75">Studencki C2C to super sprawa dla każdego początkującego przedsięciorcy, już dziś zaloguj się i zarób hajsik na cokolwiek chcesz :)</p>
                 </div>
             </div>
         </div>    
