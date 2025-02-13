@@ -84,12 +84,11 @@ try {
             $city = $_POST['city'];
             $country = $_POST['country'];
 
-            $updateStatement = $model -> updateUser($accountId, $firstname, $lastname, $email, $phone, $address, $codezip, $city, $contury);
-            var_dump($updateStatement);
-            $errorMessage = '';
+           
 
             try {
-                $updateStatement->execute();
+                $updateStatement = $model -> updateUser($accountId, $firstname, $lastname, $email, $phone, $address, $codezip, $city, $country);
+                $errorMessage = '';
                 echo "<div class='alert alert-success' role='alert'>Dane zostały zaktualizowane.</div>";
             } catch (PDOException $e) {
                 $errorMessage = $e->getMessage();

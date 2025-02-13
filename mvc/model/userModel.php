@@ -59,25 +59,28 @@ class User {
         return $stmt->execute();
     }
 
-    // Modyfikowanie usera
-    public function updateUser($accountid, $firstname, $lastname, $email, $phone, $address, $codezip, $city, $contury) {
+   // Modyfikowanie usera
+    public function updateUser($accountid, $firstname, $lastname, $email, $phone, $address, $codezip, $city, $country) {
         $query = "UPDATE accounts 
                 SET firstname = :firstname, lastname = :lastname, 
-                email = :email, phone = :phone, 
-                address = :address, codezip = :codezip, 
-                city = :city, country = :country 
-                WHERE accountid = :accountid";
+                    email = :email, phone = :phone, 
+                    address = :address, codezip = :codezip, 
+                    city = :city, country = :country 
+                WHERE accountid = :accountid"; 
         $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':accountid', $accountid, PDO::PARAM_INT);
         $stmt->bindParam(':firstname', $firstname);
-        $stmt->bindParam(':listname', $lastname);
+        $stmt->bindParam(':lastname', $lastname);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':phone', $phone);
         $stmt->bindParam(':address', $address);
         $stmt->bindParam(':codezip', $codezip);
         $stmt->bindParam(':city', $city);
-        $stmt->bindParam(':contury', $contury);
-        return $stmt;
+        $stmt->bindParam(':country', $country); 
+        
+        return $stmt->execute();
     }
+
 
     // Oznaczenie usera jako usuniętego
     public function deleteUser($accountid){
