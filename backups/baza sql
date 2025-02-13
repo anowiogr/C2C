@@ -1,0 +1,181 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+SET NAMES utf8mb4;
+
+-- Usuwanie istniejących tabel (wyłączenie kontroli kluczy obcych)
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS `message_link`;
+DROP TABLE IF EXISTS `message`;
+DROP TABLE IF EXISTS `file_to_auction`;
+DROP TABLE IF EXISTS `currency`;
+DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `auctions`;
+DROP TABLE IF EXISTS `accounts`;
+DROP TABLE IF EXISTS `type`;
+SET foreign_key_checks = 1;
+
+-- Tworzenie tabel
+CREATE TABLE `accounts` (
+  `accountid` int(11) NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `registerdate` date NOT NULL DEFAULT current_timestamp(),
+  `account_type` varchar(3) NOT NULL DEFAULT '222',
+  `verified` tinyint(1) NOT NULL,
+  `whover` int(3) NOT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(150) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `phone` varchar(9) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `codezip` varchar(6) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `auctions` (
+  `auctionid` int(11) NOT NULL,
+  `accountid` int(11) NOT NULL,
+  `categoryid` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `used` tinyint(1) DEFAULT 0,
+  `private` tinyint(1) DEFAULT 0,
+  `date_start` date DEFAULT current_timestamp(),
+  `date_end` date DEFAULT NULL,
+  `veryfied` int(1) NOT NULL DEFAULT 0,
+  `whover` int(3) NOT NULL,
+  `selled` tinyint(1) DEFAULT 0,
+  `buyerid` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `currencyid` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `category` (
+  `categoryid` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `in_tree` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `currency` (
+  `currencyid` int(10) NOT NULL,
+  `currency_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `file_to_auction` (
+  `file_id` int(11) NOT NULL,
+  `auctionid` int(11) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `file_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `mlid` int(11) NOT NULL,
+  `auctionid` int(11) NOT NULL,
+  `buyerid` int(3) NOT NULL,
+  `answer` tinyint(1) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `message_link` (
+  `mlid` int(11) NOT NULL,
+  `auctionid` int(11) NOT NULL,
+  `sellerid` int(11) NOT NULL,
+  `buyerid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `type` (
+  `type_id` varchar(3) NOT NULL,
+  `type_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Ustawienie kluczy głównych
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`accountid`);
+
+ALTER TABLE `auctions`
+  ADD PRIMARY KEY (`auctionid`);
+
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryid`);
+
+ALTER TABLE `currency`
+  ADD PRIMARY KEY (`currencyid`);
+
+ALTER TABLE `file_to_auction`
+  ADD PRIMARY KEY (`file_id`),
+  ADD KEY `auctionid` (`auctionid`);
+
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `auctionid` (`auctionid`);
+
+ALTER TABLE `message_link`
+  ADD PRIMARY KEY (`mlid`),
+  ADD KEY `auctionid` (`auctionid`),
+  ADD KEY `sellerid` (`sellerid`),
+  ADD KEY `buyerid` (`buyerid`);
+
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`type_id`);
+
+-- Ustawienie AUTO_INCREMENT
+ALTER TABLE `accounts`
+  MODIFY `accountid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+ALTER TABLE `auctions`
+  MODIFY `auctionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+ALTER TABLE `category`
+  MODIFY `categoryid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+ALTER TABLE `currency`
+  MODIFY `currencyid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+ALTER TABLE `file_to_auction`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+ALTER TABLE `message_link`
+  MODIFY `mlid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+-- Dodanie ograniczeń kluczy obcych
+ALTER TABLE `file_to_auction`
+  ADD CONSTRAINT `file_to_auction_ibfk_1` FOREIGN KEY (`auctionid`) REFERENCES `auctions` (`auctionid`) ON DELETE CASCADE;
+
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`auctionid`) REFERENCES `auctions` (`auctionid`) ON DELETE CASCADE;
+
+ALTER TABLE `message_link`
+  ADD CONSTRAINT `message_link_ibfk_1` FOREIGN KEY (`auctionid`) REFERENCES `auctions` (`auctionid`) ON DELETE CASCADE,
+  ADD CONSTRAINT `message_link_ibfk_2` FOREIGN KEY (`sellerid`) REFERENCES `accounts` (`accountid`),
+  ADD CONSTRAINT `message_link_ibfk_3` FOREIGN KEY (`buyerid`) REFERENCES `accounts` (`accountid`);
+
+ALTER TABLE `accounts`
+  ADD CONSTRAINT `fk_accounts_type` FOREIGN KEY (`account_type`) REFERENCES `type` (`type_id`);
+
+ALTER TABLE `auctions`
+  ADD CONSTRAINT `fk_auctions_currency` FOREIGN KEY (`currencyid`) REFERENCES `currency` (`currencyid`);
+
+ALTER TABLE `auctions`
+  ADD CONSTRAINT `fk_auctions_category` FOREIGN KEY (`categoryid`) REFERENCES `category` (`categoryid`);
+
+ALTER TABLE `message`
+  ADD CONSTRAINT `fk_message_buyer` FOREIGN KEY (`buyerid`) REFERENCES `accounts` (`accountid`);
+
+ALTER TABLE `auctions`
+  ADD CONSTRAINT `fk_auctions_account` FOREIGN KEY (`accountid`) REFERENCES `accounts` (`accountid`);
+
+ALTER TABLE `auctions`
+  ADD CONSTRAINT `fk_auctions_whover` FOREIGN KEY (`whover`) REFERENCES `accounts` (`accountid`);
+
+-- Samoodwołujący klucz obcy w tabeli accounts dla kolumny whover
+ALTER TABLE `accounts`
+  ADD CONSTRAINT `fk_accounts_whover` FOREIGN KEY (`whover`) REFERENCES `accounts` (`accountid`);
+
+COMMIT;

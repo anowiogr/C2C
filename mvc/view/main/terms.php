@@ -1,5 +1,5 @@
 <?php
-include_once "constant/header.php";
+include_once "./header.php";
 ?>
 	<b class="h1">Regulamin</b>
 	<br><hr>
