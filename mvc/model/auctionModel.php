@@ -160,7 +160,7 @@ class Auction {
     public function deleteAuction($auctionid) {
         $query = "DELETE FROM auctions WHERE auctionid = :auctionid";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':auctionid', $auctionId);
+            $stmt->bindParam(':auctionid', $auctionid);
             $stmt->execute();
     }
 
