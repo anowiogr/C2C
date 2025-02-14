@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $config = include 'C:/xampp/htdocs/inż/C2C/config/config.php';
+  $config = include '../../../config/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
