@@ -1,5 +1,8 @@
 <?php
 
+require_once 'databaseConnection.php';
+
+
 class Administrative {
     private $db;
 

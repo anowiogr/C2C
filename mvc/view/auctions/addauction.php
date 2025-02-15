@@ -1,6 +1,6 @@
 <?php
 
-$config = include 'C:/xampp/htdocs/inż/C2C/config/config.php';
+$config = include '../../../config/config.php';
 require '../main/header.php';
 require '../../model/auctionModel.php';
 $model = new Auction();
