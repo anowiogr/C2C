@@ -66,7 +66,7 @@ class Message {
     //Pobranie tytułu wiadomości
     public function messageTitle($auctionid){
         $query = "SELECT title FROM auctions WHERE auctionid = :auctionId";
-        $stmt = $pdo->prepare($query);
+        $stmt = $this->db->prepare($query);
         $stmt->bindParam(':auctionId', $auctionid, PDO::PARAM_INT);
         $stmt->execute();
         $auction = $stmt->fetch(PDO::FETCH_ASSOC); 

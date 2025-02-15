@@ -29,7 +29,7 @@ try {
                 </div>
                 <div class="row col-md-11">
                     <div class="col-md-6">
-                        <img class="fill" src="../../images/nofoto.jpg" />
+                        <img class="fill" src="<?php echo '..\..\..\images\nofoto.jpg';?>" />
                     </div>
 
                     <div class="p-3 mb-2 col-md-6" style="text-align: right;">
@@ -120,7 +120,7 @@ try {
         foreach ($auctions as $auction) {
             echo <<< TABLELISTA
                 <div class="row box p-3">
-                    <img class="aimg" src="images/nofoto.jpg" />
+                    <img class="aimg" src="..\..\..\images\nofoto.jpg" />
                     
                     <div class="box-text" >
                     

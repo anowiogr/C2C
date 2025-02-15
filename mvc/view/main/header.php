@@ -1,6 +1,6 @@
 <?php
 
-    $config = include '../../../config/config.php';
+    $config = include 'C:/xampp/htdocs/inż/C2C/config/config.php';
 
     session_start();
     //print_r($_SESSION["logged"]);
@@ -43,10 +43,10 @@
                 ?>
                    <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="<?php echo 'mvc/view/main/login.php';?>"><button type="button" class="btn btn-outline-light me-2">Zaloguj</button></a>
+                            <a href="<?php echo $config['baseurl'].'/mvc/view/main/login.php';?>"><button type="button" class="btn btn-outline-light me-2">Zaloguj</button></a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo 'mvc/view/main/register.php'; ?>"><button type="button" class="btn btn-light">Zarejestruj się</button></a>
+                            <a href="<?php echo $config['baseurl'].'/mvc/view/main/register.php'; ?>"><button type="button" class="btn btn-light">Zarejestruj się</button></a>
                         </li>
                     </ul>
 
@@ -55,16 +55,16 @@
         ?>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="mvc/view/auctions/userauctions.php">Twoje aukcje</a>
+                                <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/auctions/userauctions.php'; ?>">Twoje aukcje</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="mvc/view/messages/messagelist.php">Wiadomości</a>
+                                <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/messages/messagelist.php';?>">Wiadomości</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="mvc/view/users/userabout.php">Ustawienia</a>
+                                <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/users/userabout.php'?>">Ustawienia</a>
                             </li>
                             <li class="nav-item active">
-                                <a href="mvc/controller/logout.php"><button type="button" class="btn btn-danger">Wyloguj</button></a>
+                                <a href="<?php echo $config['baseurl'].'/mvc/controller/logout.php';?>"><button type="button" class="btn btn-danger">Wyloguj</button></a>
                             </li>
                         </ul>
 
@@ -74,19 +74,19 @@
 
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="mvc/view/auctions/userauctions.php">Twoje aukcje</a>
+                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/auctions/userauctions.php'?>">Twoje aukcje</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="mvc/view/messages/messagelist.php">Wiadomości</a>
+                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/messages/messagelist.php';?>">Wiadomości</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="mvc/view/administrativs/admin.php">Administracja</a>
+                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/administrativs/admin.php';?>">Administracja</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="mvc/view/users/userabout.php">Ustawienia</a>
+                                    <a class="nav-link" href="<?php echo $config['baseurl'].'/mvc/view/users/userabout.php';?>">Ustawienia</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a href="mvc/controller/logout.php"><button type="button" class="btn btn-danger">Wyloguj</button></a>
+                                    <a href="<?php echo $config['baseurl'].'/mvc/controller/logout.php';?>"><button type="button" class="btn btn-danger">Wyloguj</button></a>
                                 </li>
                             </ul>
 
