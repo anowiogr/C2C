@@ -109,12 +109,6 @@ try {
 
            // $auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (empty($auctions)) {
-                echo "<div class='alert alert-warning' role='alert'>Nie ma żadnych aukcji w tej kategorii. Oto inne dostępne aukcje:</div>";
-                $stmt = $model -> getAllAuction();
-                $auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
-
         } else {
             $stmt = $model -> getAllAuction();
             $auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
