@@ -10,5 +10,5 @@ Aby uruchomić pojekt należy:
 5. Następnie należy ustawić nowego usera z uprawnieniami do bazy utworzonej w punk.2
 6. Z katalogu backups należy pobrać sql do tworzenia schematu bazy danych oraz w przypadku potrzeby danych domyślnych sql z przykładowymi danymi.
 7. W phpMyAdmin w Query dla bazy danych należy uruchomić sql, o których mowa w pt.6.
-8. W katalogu config, pliku config.php należy uzupełnić dane do bazy danych.
+8. W katalogu config, pliku config.php należy uzupełnić dane do bazy danych oraz domyślny url w baseurl, dodatkowo w ścieżce projektu mvc/view/main/header.php podać ścieżkę bezwzględną do pliku confgi.php
 
