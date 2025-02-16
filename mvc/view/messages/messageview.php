@@ -25,6 +25,7 @@ try {
         <!--Wróć do widoku wszystkich aukcji-->
     </button>
 </div>
+<br>
                 <div id="messview">
 
                 <table class="table table-striped">
