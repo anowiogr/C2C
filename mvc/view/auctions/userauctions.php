@@ -31,7 +31,7 @@ try {
             }
             echo <<< TABLELISTA
                 <div class="row box p-3">
-                    <img class="aimg" src="images/nofoto.jpg" />
+                    <img class="aimg" src="../../../images/nofoto.jpg" />
                     
                     <div class="box-text" >
                     <div style="text-align: right; font-size: 0.6em;">Data wystawienia: $auction[date_start] </div>
@@ -78,7 +78,7 @@ try {
             echo <<< TABLELISTA
                 <div class="row box p-3">
                     
-                    <img class="aimg" src="images/nofoto.jpg" />
+                    <img class="aimg" src="../../../images/nofoto.jpg" />
                     
                     <div class="box-text" >
                     <div style="text-align: right; font-size: 0.6em;">Data wystawienia: $auction[date_start] </div> 

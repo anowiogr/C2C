@@ -17,6 +17,9 @@ try {
         // Pobranie informacji o wybranej aukcji
         $auction = $model -> getAuctionById($auctionId);
 
+        //Pobieraj link do obrazka aukcji
+        $foto = "..\..\..\images\nofoto.jpg";
+
         if ($auction) {
             ?>
                 <div class="row col-md-1">
@@ -104,7 +107,7 @@ try {
 
             $_SESSION["filter"]["categoryid"]=null;
 
-            $auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           // $auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($auctions)) {
                 echo "<div class='alert alert-warning' role='alert'>Nie ma żadnych aukcji w tej kategorii. Oto inne dostępne aukcje:</div>";
@@ -120,7 +123,7 @@ try {
         foreach ($auctions as $auction) {
             echo <<< TABLELISTA
                 <div class="row box p-3">
-                    <img class="aimg" src="..\..\..\images\nofoto.jpg" />
+                    <img class="aimg" src="../../../images/nofoto.jpg" />
                     
                     <div class="box-text" >
                     

@@ -87,7 +87,7 @@ ERROR;
         <a href="./forgot-password.php">Zapomniałem hasła</a>
       </p>
       <p class="mb-0">
-        <a href="./register.php" class="text-center">Stwórz nowe konto OLX</a>
+        <a href="./register.php" class="text-center">Stwórz nowe konto</a>
       </p>
     </div>
     <!-- /.card-body -->
