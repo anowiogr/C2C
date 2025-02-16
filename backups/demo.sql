@@ -12,91 +12,91 @@ DROP TABLE IF EXISTS `type`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
--- Utworzenie tabeli accounts
-CREATE TABLE `accounts` (
-  `accountid` int(11) NOT NULL,
-  `login` varchar(100) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `registerdate` date NOT NULL DEFAULT current_timestamp(),
-  `account_type` varchar(3) NOT NULL DEFAULT '222',
-  `verified` tinyint(1) NOT NULL,
-  `whover` int(3) NOT NULL,
-  `firstname` varchar(50) DEFAULT NULL,
-  `lastname` varchar(150) DEFAULT NULL,
-  `email` varchar(250) DEFAULT NULL,
-  `phone` varchar(9) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL,
-  `codezip` varchar(6) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `country` varchar(50) DEFAULT NULL
+-- Create table accounts
+CREATE TABLE accounts (
+  accountid int(11) NOT NULL,
+  login varchar(100) NOT NULL,
+  password varchar(250) NOT NULL,
+  registerdate date NOT NULL DEFAULT current_timestamp(),
+  account_type varchar(3) NOT NULL DEFAULT '222',
+  verified tinyint(1) NOT NULL,
+  whover int(3) NOT NULL,
+  firstname varchar(50) DEFAULT NULL,
+  lastname varchar(150) DEFAULT NULL,
+  email varchar(250) DEFAULT NULL,
+  phone varchar(9) DEFAULT NULL,
+  address varchar(200) DEFAULT NULL,
+  codezip varchar(6) DEFAULT NULL,
+  city varchar(50) DEFAULT NULL,
+  country varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli auctions
-CREATE TABLE `auctions` (
-  `auctionid` int(11) NOT NULL,
-  `accountid` int(11) NOT NULL,
-  `categoryid` int(11) NOT NULL,
-  `title` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `used` tinyint(1) DEFAULT 0,
-  `private` tinyint(1) DEFAULT 0,
-  `date_start` date DEFAULT current_timestamp(),
-  `date_end` date DEFAULT NULL,
-  `veryfied` int(1) NOT NULL DEFAULT 0,
-  `whover` int(3) NOT NULL,
-  `selled` tinyint(1) DEFAULT 0,
-  `buyerid` int(11) DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  `currencyid` int(10) NOT NULL
+-- Create table auctions
+CREATE TABLE auctions (
+  auctionid int(11) NOT NULL,
+  accountid int(11) NOT NULL,
+  categoryid int(11) NOT NULL,
+  title varchar(100) DEFAULT NULL,
+  description text DEFAULT NULL,
+  used tinyint(1) DEFAULT 0,
+  private tinyint(1) DEFAULT 0,
+  date_start date DEFAULT current_timestamp(),
+  date_end date DEFAULT NULL,
+  veryfied int(1) NOT NULL DEFAULT 0,
+  whover int(3) NOT NULL,
+  selled tinyint(1) DEFAULT 0,
+  buyerid int(11) DEFAULT NULL,
+  price double DEFAULT NULL,
+  currencyid int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli category
-CREATE TABLE `category` (
-  `categoryid` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `in_tree` int(11) DEFAULT NULL
+-- Create table category
+CREATE TABLE category (
+  categoryid int(11) NOT NULL,
+  name varchar(100) DEFAULT NULL,
+  in_tree int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli currency
-CREATE TABLE `currency` (
-  `currencyid` int(10) NOT NULL,
-  `currency_name` varchar(20) NOT NULL
+-- Create table currency
+CREATE TABLE currency (
+  currencyid int(10) NOT NULL,
+  currency_name varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli file_to_auction
-CREATE TABLE `file_to_auction` (
-  `file_id` int(11) NOT NULL,
-  `auctionid` int(11) NOT NULL,
-  `filename` varchar(255) NOT NULL,
-  `file_path` varchar(255) NOT NULL
+-- Create table file_to_auction
+CREATE TABLE file_to_auction (
+  file_id int(11) NOT NULL,
+  auctionid int(11) NOT NULL,
+  filename varchar(255) NOT NULL,
+  file_path varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli message
-CREATE TABLE `message` (
-  `id` int(11) NOT NULL,
-  `mlid` int(11) NOT NULL,
-  `auctionid` int(11) NOT NULL,
-  `buyerid` int(3) NOT NULL,
-  `answer` tinyint(1) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `description` text DEFAULT NULL
+-- Create table message
+CREATE TABLE message (
+  id int(11) NOT NULL,
+  mlid int(11) NOT NULL,
+  auctionid int(11) NOT NULL,
+  buyerid int(3) NOT NULL,
+  answer tinyint(1) NOT NULL,
+  date datetime NOT NULL DEFAULT current_timestamp(),
+  description text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli message_link
-CREATE TABLE `message_link` (
-  `mlid` int(11) NOT NULL,
-  `auctionid` int(11) NOT NULL,
-  `sellerid` int(11) NOT NULL,
-  `buyerid` int(11) NOT NULL
+-- Create table message_link
+CREATE TABLE message_link (
+  mlid int(11) NOT NULL,
+  auctionid int(11) NOT NULL,
+  sellerid int(11) NOT NULL,
+  buyerid int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Utworzenie tabeli type
-CREATE TABLE `type` (
-  `type_id` varchar(3) NOT NULL,
-  `type_name` varchar(20) NOT NULL
+-- Create table type
+CREATE TABLE type (
+  type_id varchar(3) NOT NULL,
+  type_name varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Ustawienie kluczy głównych
+-- Setting primary keys
 ALTER TABLE accounts
   ADD PRIMARY KEY (accountid);
 
@@ -126,31 +126,30 @@ ALTER TABLE message_link
 ALTER TABLE type
   ADD PRIMARY KEY (type_id);
 
--- Ustawienie AUTO_INCREMENT
+-- Setting AUTO_INCREMENT values
 ALTER TABLE accounts
-  MODIFY accountid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY accountid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 ALTER TABLE auctions
   MODIFY auctionid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 ALTER TABLE category
-  MODIFY categoryid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY categoryid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE currency
-  MODIFY currencyid int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY currencyid int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE file_to_auction
   MODIFY file_id int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE message
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 ALTER TABLE message_link
-  MODIFY mlid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY mlid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
--- Dodanie ograniczeń kluczy obcych (zakomentowane zgodnie z wymaganiami)
 /*
--- Dodanie ograniczeń kluczy obcych
+-- Adding foreign key constraints (commented out)
 ALTER TABLE file_to_auction
   ADD CONSTRAINT file_to_auction_ibfk_1 FOREIGN KEY (auctionid) REFERENCES auctions (auctionid) ON DELETE CASCADE;
 
@@ -180,250 +179,315 @@ ALTER TABLE auctions
 ALTER TABLE auctions
   ADD CONSTRAINT fk_auctions_whover FOREIGN KEY (whover) REFERENCES accounts (accountid);
 
--- Samoodwołujący klucz obcy w tabeli accounts dla kolumny whover
 ALTER TABLE accounts
   ADD CONSTRAINT fk_accounts_whover FOREIGN KEY (whover) REFERENCES accounts (accountid);
 */
 COMMIT;
 
--- ----------------------------------------------------------
--- Poniżej rozpoczynamy wstawianie przykładowych danych.
--- Całość operacji odbywa się wewnątrz TRANSACTION.
+-- Inserting sample data for a student project
 
 START TRANSACTION;
 
--- ----------------------------------------
--- Dane dla tabeli type (poziomy użytkowników)
+-- Inserting account types
 INSERT INTO type (type_id, type_name) VALUES
 ('101', 'Administrator'),
 ('222', 'Użytkownik');
 
--- ----------------------------------------
--- Dane dla tabeli currency
-
+-- Inserting currencies (PLN and EUR)
 INSERT INTO currency (currencyid, currency_name) VALUES
 (1, 'PLN'),
 (2, 'EUR');
 
--- ----------------------------------------
--- Dane dla tabeli category
-
+-- Inserting categories
 INSERT INTO category (categoryid, name, in_tree) VALUES
 (1, 'Elektronika', 0),
-(2, 'Meble', 0),
-(3, 'Rowery', 0),
-(4, 'Podręczniki', 0),
-(5, 'Sport i Rekreacja', 0),
-(6, 'Gry i Konsole', 0);
+(2, 'Książki', 0),
+(3, 'Meble', 0),
+(4, 'Ubrania', 0),
+(5, 'Sport', 0),
+(6, 'Inne', 0);
 
--- ----------------------------------------
--- Dane dla tabeli accounts
-
+-- Inserting accounts (10 users)
+-- Admin account (accountid 1)
 INSERT INTO accounts (accountid, login, password, registerdate, account_type, verified, whover, firstname, lastname, email, phone, address, codezip, city, country) VALUES
-(1, 'admin', '$argon2id$v=19$m=65536,t=4,p=1$admin$admin', '2024-09-10', '101', 1, 0, 'Admin', 'Adminowski', 'admin@example.com', '111111111', 'ul. Centrum 1', '00-001', 'Warszawa', 'Polska'),
-(2, 'mod', '$argon2id$v=19$m=65536,t=4,p=1$mod$mod', '2024-09-11', '222', 1, 1, 'Marek', 'Moderator', 'mod@example.com', '222222222', 'ul. Moderatorów 2', '00-002', 'Kraków', 'Polska'),
-(3, 'Kazimierz12', '$argon2id$v=19$m=65536,t=4,p=1$Kazimierz12$Kazimierz12', '2024-09-12', '222', 1, 2, 'Kazimierz', 'Nowak', 'kazimierz12@example.com', '333333333', 'ul. Stara 3', '12-345', 'Kielce', 'Polska'),
-(4, 'Władysław34', '$argon2id$v=19$m=65536,t=4,p=1$Władysław34$Władysław34', '2024-09-13', '222', 1, 2, 'Władysław', 'Kowalski', 'wladyslaw34@example.com', '444444444', 'ul. Młoda 4', '23-456', 'Lublin', 'Polska'),
-(5, 'Zbigniew56', '$argon2id$v=19$m=65536,t=4,p=1$Zbigniew56$Zbigniew56', '2024-09-14', '222', 1, 2, 'Zbigniew', 'Wiśniewski', 'zbigniew56@example.com', '555555555', 'ul. Nowa 5', '34-567', 'Poznań', 'Polska'),
-(6, 'Stanisław78', '$argon2id$v=19$m=65536,t=4,p=1$Stanisław78$Stanisław78', '2024-09-15', '222', 1, 2, 'Stanisław', 'Wójcik', 'stanislaw78@example.com', '666666666', 'ul. Krótka 6', '45-678', 'Gdańsk', 'Polska'),
-(7, 'Janusz90', '$argon2id$v=19$m=65536,t=4,p=1$Janusz90$Janusz90', '2024-09-16', '222', 1, 2, 'Janusz', 'Kamiński', 'janusz90@example.com', '777777777', 'ul. Długa 7', '56-789', 'Wrocław', 'Polska'),
-(8, 'Bogdan23', '$argon2id$v=19$m=65536,t=4,p=1$Bogdan23$Bogdan23', '2024-09-17', '222', 1, 2, 'Bogdan', 'Lewandowski', 'bogdan23@example.com', '888888888', 'ul. Piękna 8', '67-890', 'Szczecin', 'Polska'),
-(9, 'Mieczysław45', '$argon2id$v=19$m=65536,t=4,p=1$Mieczysław45$Mieczysław45', '2024-09-18', '222', 1, 2, 'Mieczysław', 'Zieliński', 'mieczyslaw45@example.com', '999999999', 'ul. Leśna 9', '78-901', 'Katowice', 'Polska'),
-(10, 'Czesław67', '$argon2id$v=19$m=65536,t=4,p=1$Czesław67$Czesław67', '2024-09-19', '222', 1, 2, 'Czesław', 'Szymański', 'czeslaw67@example.com', '101010101', 'ul. Szkolna 10', '89-012', 'Łódź', 'Polska');
+(1, 'admin', '$argon2id$v=19$m=65536,t=4,p=1$YWRtaW4$HASH_ADMIN', '2024-10-01', '101', 1, 0, 'Admin', 'Adminowski', 'admin@example.com', '111111111', 'ul. Admina 1', '00-001', 'Warszawa', 'Polska');
 
--- ----------------------------------------
--- Dane dla tabeli auctions
+-- Moderator account (accountid 2), verified by admin (whover = 1)
+INSERT INTO accounts (accountid, login, password, registerdate, account_type, verified, whover, firstname, lastname, email, phone, address, codezip, city, country) VALUES
+(2, 'mod', '$argon2id$v=19$m=65536,t=4,p=1$bW9k$HASH_MOD', '2024-10-02', '222', 1, 1, 'Mod', 'Moderator', 'mod@example.com', '222222222', 'ul. Moderacji 2', '00-002', 'Kraków', 'Polska');
+
+-- Other user accounts, verified by moderator (whover = 2)
+INSERT INTO accounts (accountid, login, password, registerdate, account_type, verified, whover, firstname, lastname, email, phone, address, codezip, city, country) VALUES
+(3, 'Wojciech17', '$argon2id$v=19$m=65536,t=4,p=1$V29qY2hpZWNoMTc$HASH_Wojciech17', '2024-10-03', '222', 1, 2, 'Wojciech', 'Kowalski', 'wojciech17@example.com', '333333333', 'ul. Słoneczna 3', '01-001', 'Poznań', 'Polska'),
+(4, 'Zbigniew34', '$argon2id$v=19$m=65536,t=4,p=1$WmJpZ25pZXdCMzQ$HASH_Zbigniew34', '2024-10-04', '222', 1, 2, 'Zbigniew', 'Nowak', 'zbigniew34@example.com', '444444444', 'ul. Kwiatowa 4', '02-002', 'Wrocław', 'Polska'),
+(5, 'Stanisław09', '$argon2id$v=19$m=65536,t=4,p=1$U3RhbnNpbGF3MDk$HASH_Stanisław09', '2024-10-05', '222', 1, 2, 'Stanisław', 'Lewandowski', 'stanislaw09@example.com', '555555555', 'ul. Leśna 5', '03-003', 'Gdańsk', 'Polska'),
+(6, 'Kazimierz42', '$argon2id$v=19$m=65536,t=4,p=1$S2F6aW1pZXJ6NDI$HASH_Kazimierz42', '2024-10-06', '222', 1, 2, 'Kazimierz', 'Wójcik', 'kazimierz42@example.com', '666666666', 'ul. Ogrodowa 6', '04-004', 'Łódź', 'Polska'),
+(7, 'Lech56', '$argon2id$v=19$m=65536,t=4,p=1$TGVjaDU2$HASH_Lech56', '2024-10-07', '222', 1, 2, 'Lech', 'Krawczyk', 'lech56@example.com', '777777777', 'ul. Polna 7', '05-005', 'Lublin', 'Polska'),
+(8, 'Mieczysław23', '$argon2id$v=19$m=65536,t=4,p=1$TWllY2h5c3dhMjM$HASH_Mieczysław23', '2024-10-08', '222', 1, 2, 'Mieczysław', 'Kamiński', 'mieczyslaw23@example.com', '888888888', 'ul. Lipowa 8', '06-006', 'Szczecin', 'Polska'),
+(9, 'Bolesław88', '$argon2id$v=19$m=65536,t=4,p=1$Qm9sZXNsYXdhODg$HASH_Bolesław88', '2024-10-09', '222', 1, 2, 'Bolesław', 'Zieliński', 'boleslaw88@example.com', '999999999', 'ul. Wiosenna 9', '07-007', 'Katowice', 'Polska'),
+(10, 'Janusz77', '$argon2id$v=19$m=65536,t=4,p=1$SmFudXNaNzc$HASH_Janusz77', '2024-10-10', '222', 1, 2, 'Janusz', 'Wiśniewski', 'janusz77@example.com', '101010101', 'ul. Jesienna 10', '08-008', 'Lublin', 'Polska');
+
+-- Inserting auctions
+
+-- Auctions by user 3 (Wojciech17)
 INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
--- Użytkownik Kazimierz12 (id=3)
-(24, 3, 1, 'Używany laptop Lenovo ThinkPad', 'Laptop Lenovo ThinkPad, 15-calowy, w dobrym stanie, idealny dla studenta.', 0, 0, '2024-10-05', '2024-10-12', 1, 2, 0, NULL, 900, 1),
-(25, 3, 2, 'Biurko studenckie z drugiej ręki', 'Solidne biurko, lekkie ślady użytkowania, dobre do nauki i pracy.', 0, 0, '2024-10-06', '2024-10-13', 1, 2, 0, NULL, 200, 1),
--- Użytkownik Władysław34 (id=4)
-(26, 4, 3, 'Używany rower górski', 'Rower górski z lekkim zużyciem, sprawny mechanizm, gotowy do jazdy w terenie.', 0, 0, '2024-10-07', '2024-10-14', 1, 2, 0, NULL, 400, 1),
-(27, 4, 4, 'Zestaw podręczników do ekonomii', 'Kompletny zestaw podręczników dla studentów ekonomii, używane, lecz czytelne.', 0, 0, '2024-10-08', '2024-10-15', 1, 2, 0, NULL, 150, 1),
--- Użytkownik Zbigniew56 (id=5)
-(28, 5, 5, 'Sprzęt fitness – hantle i mata', 'Zestaw do ćwiczeń w domu, hantle oraz mata, idealne dla aktywnego studenta.', 0, 0, '2024-10-09', '2024-10-16', 1, 2, 0, NULL, 250, 1),
-(29, 5, 6, 'Konsola do gier z kolekcją gier', 'Używana konsola z kilkoma grami, gotowa do rozrywki, sprawna technicznie.', 0, 0, '2024-10-10', '2024-10-17', 1, 2, 0, NULL, 300, 1),
--- Użytkownik Stanisław78 (id=6)
-(30, 6, 1, 'Smartfon Xiaomi w dobrym stanie', 'Xiaomi, lekko używany smartfon, sprawny aparat, doskonały dla studenta.', 0, 0, '2024-10-11', '2024-10-18', 1, 2, 0, NULL, 180, 1),
-(31, 6, 3, 'Używana hulajnoga elektryczna', 'Hulajnoga elektryczna, idealna do szybkiego przemieszczania się po mieście, sprawna.', 0, 0, '2024-10-12', '2024-10-19', 1, 2, 0, NULL, 220, 1),
--- Użytkownik Janusz90 (id=7)
-(32, 7, 2, 'Krzesło biurowe – ergonomiczne', 'Ergonomiczne krzesło biurowe, komfortowe podczas długich godzin nauki.', 0, 0, '2024-10-13', '2024-10-20', 1, 2, 0, NULL, 120, 1),
-(33, 7, 4, 'Podręcznik z programowania w C++', 'Podręcznik dla początkujących programistów, przejrzysty i dobrze ilustrowany.', 0, 0, '2024-10-14', '2024-10-21', 1, 2, 0, NULL, 100, 1),
--- Użytkownik Bogdan23 (id=8)
-(34, 8, 5, 'Rower miejski – lekko używany', 'Lekki rower miejski, idealny na dojazdy, w pełni sprawny, z niewielkim przebiegiem.', 0, 0, '2024-10-15', '2024-10-22', 1, 2, 0, NULL, 300, 1),
-(35, 8, 6, 'Konsola PlayStation 4 z grami', 'PS4 z kilkoma grami, w dobrym stanie, gotowa do używania. Aukcja w EUR.', 0, 0, '2024-10-16', '2024-10-23', 1, 2, 0, NULL, 350, 2),
--- Użytkownik Mieczysław45 (id=9)
-(36, 9, 1, 'Tablet Samsung Galaxy Tab', 'Tablet Samsung, idealny do nauki i rozrywki, w dobrym stanie, sprawny.', 0, 0, '2024-10-17', '2024-10-24', 1, 2, 0, NULL, 280, 1),
-(37, 9, 2, 'Stolik kawowy – nowoczesny design', 'Stolik kawowy, nowoczesny design, lekko używany, pasuje do każdego wnętrza.', 0, 0, '2024-10-18', '2024-10-25', 1, 2, 0, NULL, 180, 1),
--- Użytkownik Czesław67 (id=10)
-(38, 10, 3, 'Składany rower trekkingowy', 'Rowerek trekkingowy, składany, wygodny i lekki, idealny na wycieczki.', 0, 0, '2024-10-19', '2024-10-26', 1, 2, 0, NULL, 320, 1),
-(39, 10, 4, 'Książki naukowe – zestaw 3 tomów', 'Zestaw trzech książek naukowych, idealny dla studentów kierunków ścisłych.', 0, 0, '2024-10-20', '2024-10-27', 1, 2, 0, NULL, 200, 1);
+(1, 3, 1, 'Laptop Lenovo ThinkPad', 'Używany laptop Lenovo ThinkPad, idealny do nauki i pracy, w dobrym stanie.', 1, 0, '2024-11-01', '2024-11-10', 1, 2, 0, NULL, 800, 1),
+(2, 3, 2, 'Kolekcja książek historycznych', 'Zbiór staropolskich książek o historii Polski, ciekawa lektura.', 1, 0, '2024-11-05', '2024-11-15', 1, 2, 0, NULL, 100, 1);
 
--- ----------------------------------------
--- Oferty niezweryfikowane (używane) – dodatkowe 3 aukcje
+-- Auctions by user 4 (Zbigniew34)
 INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
-(40, 3, 1, 'Stary aparat fotograficzny analogowy', 'Klasyczny aparat fotograficzny, idealny dla miłośników fotografii analogowej, z widocznymi śladami użytkowania.', 1, 0, '2024-10-21', '2024-10-28', 0, 0, 0, NULL, 150, 1),
-(41, 5, 6, 'Używana konsola Nintendo 64', 'Kultowa konsola Nintendo 64, używana, ale w pełni sprawna, świetna dla kolekcjonerów.', 1, 0, '2024-10-22', '2024-10-29', 0, 0, 0, NULL, 220, 1),
-(42, 7, 2, 'Zestaw mebli do kawalerki – stół i krzesła', 'Kompletny zestaw mebli idealny do małego mieszkania, używany, ale zadbany.', 1, 0, '2024-10-23', '2024-10-30', 0, 0, 0, NULL, 180, 1);
+(3, 4, 3, 'Stolik drewniany', 'Solidny stolik wykonany z dębu, idealny do salonu.', 1, 0, '2024-11-02', '2024-11-12', 1, 2, 0, NULL, 150, 1),
+(4, 4, 4, 'Kurtka zimowa', 'Ciepła kurtka zimowa, lekko używana, rozmiar M.', 0, 1, '2024-11-06', '2024-11-16', 1, 2, 0, NULL, 200, 1);
 
--- ----------------------------------------
--- Dane dla tabeli file_to_auction
--- Każdej aukcji przypisujemy jedno zdjęcie – nazwa pliku zawiera id aukcji oraz datę/godzinę (przykładowo ustawioną na 10:00:00)
-INSERT INTO file_to_auction (auctionid, filename, file_path) VALUES
-(24, '24_20241005100000.jpg', 'images/auction/'),
-(25, '25_20241006100000.jpg', 'images/auction/'),
-(26, '26_20241007100000.jpg', 'images/auction/'),
-(27, '27_20241008100000.jpg', 'images/auction/'),
-(28, '28_20241009100000.jpg', 'images/auction/'),
-(29, '29_20241010100000.jpg', 'images/auction/'),
-(30, '30_20241011100000.jpg', 'images/auction/'),
-(31, '31_20241012100000.jpg', 'images/auction/'),
-(32, '32_20241013100000.jpg', 'images/auction/'),
-(33, '33_20241014100000.jpg', 'images/auction/'),
-(34, '34_20241015100000.jpg', 'images/auction/'),
-(35, '35_20241016100000.jpg', 'images/auction/'),
-(36, '36_20241017100000.jpg', 'images/auction/'),
-(37, '37_20241018100000.jpg', 'images/auction/'),
-(38, '38_20241019100000.jpg', 'images/auction/'),
-(39, '39_20241020100000.jpg', 'images/auction/'),
-(40, '40_20241021100000.jpg', 'images/auction/'),
-(41, '41_20241022100000.jpg', 'images/auction/'),
-(42, '42_20241023100000.jpg', 'images/auction/');
+-- Auctions by user 5 (Stanisław09)
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(5, 5, 5, 'Rower miejski', 'Rower miejski, idealny do codziennych dojazdów, w bardzo dobrym stanie.', 1, 0, '2024-11-03', '2024-11-13', 1, 2, 0, NULL, 400, 1),
+(6, 5, 6, 'Zestaw narzędzi', 'Kompletny zestaw narzędzi dla majsterkowicza, praktyczny i funkcjonalny.', 1, 1, '2024-11-07', '2024-11-17', 1, 2, 0, NULL, 250, 1);
 
--- ----------------------------------------
--- Dane dla tabel message oraz message_link (korespondencja dotycząca każdej aukcji)
-  
--- Aukcja id=24
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (24, 3, 4);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(1, 24, 4, 0, '2024-10-05 10:05:00', 'Dzień dobry, czy przedmiot "Używany laptop Lenovo ThinkPad" jest jeszcze dostępny? Czy mogliby Państwo rozważyć sprzedaż za 675 PLN?'),
-(1, 24, 4, 1, '2024-10-05 10:15:00', 'Witam, dziękuję za zapytanie. Aukcja jest aktywna, jednak proponowana przez Pana cena jest zbyt niska. Proponuję cenę 810 PLN.'),
-(1, 24, 4, 0, '2024-10-05 10:25:00', 'Dziękuję za odpowiedź, zgadzam się na zaproponowaną cenę. Proszę o finalizację transakcji.');
+-- Auctions by user 6 (Kazimierz42)
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(7, 6, 1, 'Smartfon Samsung Galaxy', 'Nowoczesny smartfon Samsung Galaxy, z lekkimi śladami użytkowania.', 1, 0, '2024-11-04', '2024-11-14', 1, 2, 0, NULL, 300, 1),
+(8, 6, 3, 'Krzesło biurowe', 'Ergonomiczne krzesło biurowe, wygodne do pracy przy komputerze.', 1, 0, '2024-11-08', '2024-11-18', 1, 2, 0, NULL, 120, 2);
 
--- Aukcja id=25
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (25, 3, 5);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(2, 25, 5, 0, '2024-10-06 10:05:00', 'Dzień dobry, czy biurko studenckie jest nadal dostępne? Czy możliwa jest sprzedaż za 150 PLN?'),
-(2, 25, 5, 1, '2024-10-06 10:15:00', 'Witam, biurko jest dostępne, jednak proponowana cena jest zbyt niska. Proponuję 180 PLN.'),
-(2, 25, 5, 0, '2024-10-06 10:25:00', 'Dziękuję, akceptuję proponowaną cenę.');
+-- Auctions by user 7 (Lech56)
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(9, 7, 2, 'Stary podręcznik matematyki', 'Podręcznik matematyki z czasów szkolnych, w dobrym stanie.', 1, 0, '2024-11-05', '2024-11-15', 1, 2, 0, NULL, 80, 1),
+(10, 7, 4, 'Eleganckie spodnie', 'Spodnie garniturowe, noszone kilka razy, idealne do pracy.', 1, 0, '2024-11-09', '2024-11-19', 1, 2, 0, NULL, 150, 1);
 
--- Aukcja id=26
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (26, 4, 3);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(3, 26, 3, 0, '2024-10-07 10:05:00', 'Dzień dobry, czy rower górski jest dostępny? Czy mógłbym kupić go za 300 PLN?'),
-(3, 26, 3, 1, '2024-10-07 10:15:00', 'Witam, rower jest dostępny, ale cena 300 PLN jest zbyt niska. Proponuję 360 PLN.'),
-(3, 26, 3, 0, '2024-10-07 10:25:00', 'Dziękuję, zgadzam się na 360 PLN.');
+-- Auctions by user 8 (Mieczysław23)
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(11, 8, 5, 'Piłka nożna', 'Oficjalna piłka nożna, używana tylko w lokalnych rozgrywkach.', 1, 0, '2024-11-06', '2024-11-16', 1, 2, 0, NULL, 60, 1),
+(12, 8, 6, 'Zestaw do majsterkowania', 'Praktyczny zestaw narzędzi, który sprawdzi się w każdym domu.', 1, 0, '2024-11-10', '2024-11-20', 1, 2, 0, NULL, 180, 1);
 
--- Aukcja id=27
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (27, 4, 5);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(4, 27, 5, 0, '2024-10-08 10:05:00', 'Dzień dobry, czy zestaw podręczników jest nadal dostępny? Czy możliwa jest sprzedaż za 112.50 PLN?'),
-(4, 27, 5, 1, '2024-10-08 10:15:00', 'Witam, podręczniki są dostępne, jednak proponowana cena jest zbyt niska. Proponuję 135 PLN.'),
-(4, 27, 5, 0, '2024-10-08 10:25:00', 'Dziękuję, akceptuję 135 PLN.');
+-- Auctions by user 9 (Bolesław88)
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(13, 9, 1, 'Tablet Android', 'Tablet z systemem Android, idealny do rozrywki i nauki.', 1, 0, '2024-11-07', '2024-11-17', 1, 2, 0, NULL, 220, 1),
+(14, 9, 2, 'Komiks superbohaterski', 'Komiks z serii przygód superbohaterów, nowy egzemplarz.', 0, 0, '2024-11-11', '2024-11-21', 1, 2, 0, NULL, 50, 1);
 
--- Aukcja id=28
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (28, 5, 3);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(5, 28, 3, 0, '2024-10-09 10:05:00', 'Dzień dobry, czy sprzęt fitness jest dostępny? Czy mogę kupić za 187.50 PLN?'),
-(5, 28, 3, 1, '2024-10-09 10:15:00', 'Witam, sprzęt jest dostępny, ale cena 187.50 PLN jest zbyt niska. Proponuję 225 PLN.'),
-(5, 28, 3, 0, '2024-10-09 10:25:00', 'Dziękuję, zgadzam się na 225 PLN.');
+-- Auctions by user 10 (Janusz77)
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(15, 10, 3, 'Regał na książki', 'Solidny regał na książki, lekko używany, w dobrym stanie.', 1, 0, '2024-11-08', '2024-11-18', 1, 2, 0, NULL, 100, 1),
+(16, 10, 4, 'Koszula elegancka', 'Elegancka koszula, idealna na spotkania biznesowe.', 0, 0, '2024-11-12', '2024-11-22', 1, 2, 0, NULL, 90, 1);
 
--- Aukcja id=29
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (29, 5, 6);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(6, 29, 6, 0, '2024-10-10 10:05:00', 'Dzień dobry, czy konsola jest nadal dostępna? Czy możliwa jest sprzedaż za 225 PLN?'),
-(6, 29, 6, 1, '2024-10-10 10:15:00', 'Witam, konsola jest dostępna, jednak cena 225 PLN jest zbyt niska. Proponuję 270 PLN.'),
-(6, 29, 6, 0, '2024-10-10 10:25:00', 'Dziękuję, akceptuję 270 PLN.');
+-- Extra unverified auctions
+INSERT INTO auctions (auctionid, accountid, categoryid, title, description, used, private, date_start, date_end, veryfied, whover, selled, buyerid, price, currencyid) VALUES
+(17, 3, 5, 'Deskorolka', 'Deskorolka dla młodzieży, używana, ale wciąż sprawna.', 1, 0, '2024-11-10', '2024-11-20', 0, 0, 0, NULL, 70, 1),
+(18, 4, 6, 'Głośniki bluetooth', 'Głośniki bluetooth, idealne do imprez, w atrakcyjnej cenie.', 1, 0, '2024-11-11', '2024-11-21', 0, 0, 0, NULL, 130, 1),
+(19, 5, 1, 'Kamera sportowa', 'Kamera sportowa nagrywająca w wysokiej rozdzielczości, z kompletem akcesoriów.', 1, 0, '2024-11-12', '2024-11-22', 0, 0, 0, NULL, 200, 1);
 
--- Aukcja id=30
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (30, 6, 7);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(7, 30, 7, 0, '2024-10-11 10:05:00', 'Dzień dobry, czy smartfon jest dostępny? Czy mógłbym kupić go za 135 PLN?'),
-(7, 30, 7, 1, '2024-10-11 10:15:00', 'Witam, smartfon jest dostępny, ale cena 135 PLN jest zbyt niska. Proponuję 162 PLN.'),
-(7, 30, 7, 0, '2024-10-11 10:25:00', 'Dziękuję, zgadzam się na 162 PLN.');
+-- Inserting message links for each auction
 
--- Aukcja id=31
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (31, 6, 8);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(8, 31, 8, 0, '2024-10-12 10:05:00', 'Dzień dobry, czy hulajnoga elektryczna jest dostępna? Czy mogę kupić za 165 PLN?'),
-(8, 31, 8, 1, '2024-10-12 10:15:00', 'Witam, hulajnoga jest dostępna, jednak cena 165 PLN jest zbyt niska. Proponuję 198 PLN.'),
-(8, 31, 8, 0, '2024-10-12 10:25:00', 'Dziękuję, akceptuję 198 PLN.');
+INSERT INTO message_link (mlid, auctionid, sellerid, buyerid) VALUES
+(1, 1, 3, 4),
+(2, 2, 3, 4),
+(3, 3, 4, 5),
+(4, 4, 4, 5),
+(5, 5, 5, 6),
+(6, 6, 5, 6),
+(7, 7, 6, 7),
+(8, 8, 6, 7),
+(9, 9, 7, 8),
+(10, 10, 7, 8),
+(11, 11, 8, 9),
+(12, 12, 8, 9),
+(13, 13, 9, 10),
+(14, 14, 9, 10),
+(15, 15, 10, 3),
+(16, 16, 10, 3),
+(17, 17, 3, 4),
+(18, 18, 4, 5),
+(19, 19, 5, 6);
 
--- Aukcja id=32
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (32, 7, 8);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(9, 32, 8, 0, '2024-10-13 10:05:00', 'Dzień dobry, czy krzesło biurowe jest nadal dostępne? Czy możliwa jest sprzedaż za 90 PLN?'),
-(9, 32, 8, 1, '2024-10-13 10:15:00', 'Witam, krzesło jest dostępne, ale cena 90 PLN jest zbyt niska. Proponuję 108 PLN.'),
-(9, 32, 8, 0, '2024-10-13 10:25:00', 'Dziękuję, zgadzam się na 108 PLN.');
+-- Inserting messages for each auction conversation
 
--- Aukcja id=33
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (33, 7, 9);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(10, 33, 9, 0, '2024-10-14 10:05:00', 'Dzień dobry, czy podręcznik jest dostępny? Czy mógłbym kupić za 75 PLN?'),
-(10, 33, 9, 1, '2024-10-14 10:15:00', 'Witam, podręcznik jest dostępny, jednak cena 75 PLN jest zbyt niska. Proponuję 90 PLN.'),
-(10, 33, 9, 0, '2024-10-14 10:25:00', 'Dziękuję, akceptuję 90 PLN.');
+-- Auction 1 (auctionid = 1, title: 'Laptop Lenovo ThinkPad', price: 800, PLN, buyerid: 4)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(1, 1, 1, 4, 0, '2024-11-01 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(2, 1, 1, 4, 0, '2024-11-01 10:01:00', 'Czy przedmiot "Laptop Lenovo ThinkPad" jest nadal dostępny?'),
+(3, 1, 1, 4, 1, '2024-11-01 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(4, 1, 1, 4, 0, '2024-11-01 10:03:00', 'Czy mógłby Pan sprzedać za 600 PLN?'),
+(5, 1, 1, 4, 1, '2024-11-01 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(6, 1, 1, 4, 1, '2024-11-01 10:05:00', 'Mogę zaproponować cenę 720 PLN.'),
+(7, 1, 1, 4, 0, '2024-11-01 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=34
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (34, 8, 7);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(11, 34, 7, 0, '2024-10-15 10:05:00', 'Dzień dobry, czy rower miejski jest nadal dostępny? Czy możliwa jest sprzedaż za 225 PLN?'),
-(11, 34, 7, 1, '2024-10-15 10:15:00', 'Witam, rower jest dostępny, ale cena 225 PLN jest zbyt niska. Proponuję 270 PLN.'),
-(11, 34, 7, 0, '2024-10-15 10:25:00', 'Dziękuję, zgadzam się na 270 PLN.');
+-- Auction 2 (auctionid = 2, title: 'Kolekcja książek historycznych', price: 100, PLN, buyerid: 4)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(8, 2, 2, 4, 0, '2024-11-05 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(9, 2, 2, 4, 0, '2024-11-05 10:01:00', 'Czy przedmiot "Kolekcja książek historycznych" jest nadal dostępny?'),
+(10, 2, 2, 4, 1, '2024-11-05 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(11, 2, 2, 4, 0, '2024-11-05 10:03:00', 'Czy mógłby Pan sprzedać za 75 PLN?'),
+(12, 2, 2, 4, 1, '2024-11-05 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(13, 2, 2, 4, 1, '2024-11-05 10:05:00', 'Mogę zaproponować cenę 90 PLN.'),
+(14, 2, 2, 4, 0, '2024-11-05 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=35 (waluta EUR)
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (35, 8, 9);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(12, 35, 9, 0, '2024-10-16 10:05:00', 'Dzień dobry, czy konsola PS4 jest dostępna? Czy mogę kupić za 262.50 EUR?'),
-(12, 35, 9, 1, '2024-10-16 10:15:00', 'Witam, konsola jest dostępna, jednak cena 262.50 EUR jest zbyt niska. Proponuję 315 EUR.'),
-(12, 35, 9, 0, '2024-10-16 10:25:00', 'Dziękuję, akceptuję 315 EUR.');
+-- Auction 3 (auctionid = 3, title: 'Stolik drewniany', price: 150, PLN, buyerid: 5)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(15, 3, 3, 5, 0, '2024-11-02 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(16, 3, 3, 5, 0, '2024-11-02 10:01:00', 'Czy przedmiot "Stolik drewniany" jest nadal dostępny?'),
+(17, 3, 3, 5, 1, '2024-11-02 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(18, 3, 3, 5, 0, '2024-11-02 10:03:00', 'Czy mógłby Pan sprzedać za 113 PLN?'),
+(19, 3, 3, 5, 1, '2024-11-02 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(20, 3, 3, 5, 1, '2024-11-02 10:05:00', 'Mogę zaproponować cenę 135 PLN.'),
+(21, 3, 3, 5, 0, '2024-11-02 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=36
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (36, 9, 10);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(13, 36, 10, 0, '2024-10-17 10:05:00', 'Dzień dobry, czy tablet jest dostępny? Czy mogę kupić za 210 PLN?'),
-(13, 36, 10, 1, '2024-10-17 10:15:00', 'Witam, tablet jest dostępny, jednak cena 210 PLN jest zbyt niska. Proponuję 252 PLN.'),
-(13, 36, 10, 0, '2024-10-17 10:25:00', 'Dziękuję, zgadzam się na 252 PLN.');
+-- Auction 4 (auctionid = 4, title: 'Kurtka zimowa', price: 200, PLN, buyerid: 5)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(22, 4, 4, 5, 0, '2024-11-06 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(23, 4, 4, 5, 0, '2024-11-06 10:01:00', 'Czy przedmiot "Kurtka zimowa" jest nadal dostępny?'),
+(24, 4, 4, 5, 1, '2024-11-06 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(25, 4, 4, 5, 0, '2024-11-06 10:03:00', 'Czy mógłby Pan sprzedać za 150 PLN?'),
+(26, 4, 4, 5, 1, '2024-11-06 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(27, 4, 4, 5, 1, '2024-11-06 10:05:00', 'Mogę zaproponować cenę 180 PLN.'),
+(28, 4, 4, 5, 0, '2024-11-06 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=37
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (37, 9, 3);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(14, 37, 3, 0, '2024-10-18 10:05:00', 'Dzień dobry, czy stolik kawowy jest nadal dostępny? Czy możliwa jest sprzedaż za 135 PLN?'),
-(14, 37, 3, 1, '2024-10-18 10:15:00', 'Witam, stolik jest dostępny, jednak cena 135 PLN jest zbyt niska. Proponuję 162 PLN.'),
-(14, 37, 3, 0, '2024-10-18 10:25:00', 'Dziękuję, akceptuję 162 PLN.');
+-- Auction 5 (auctionid = 5, title: 'Rower miejski', price: 400, PLN, buyerid: 6)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(29, 5, 5, 6, 0, '2024-11-03 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(30, 5, 5, 6, 0, '2024-11-03 10:01:00', 'Czy przedmiot "Rower miejski" jest nadal dostępny?'),
+(31, 5, 5, 6, 1, '2024-11-03 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(32, 5, 5, 6, 0, '2024-11-03 10:03:00', 'Czy mógłby Pan sprzedać za 300 PLN?'),
+(33, 5, 5, 6, 1, '2024-11-03 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(34, 5, 5, 6, 1, '2024-11-03 10:05:00', 'Mogę zaproponować cenę 360 PLN.'),
+(35, 5, 5, 6, 0, '2024-11-03 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=38
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (38, 10, 3);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(15, 38, 3, 0, '2024-10-19 10:05:00', 'Dzień dobry, czy rower trekkingowy jest dostępny? Czy mogę kupić za 240 PLN?'),
-(15, 38, 3, 1, '2024-10-19 10:15:00', 'Witam, rower jest dostępny, ale cena 240 PLN jest zbyt niska. Proponuję 288 PLN.'),
-(15, 38, 3, 0, '2024-10-19 10:25:00', 'Dziękuję, zgadzam się na 288 PLN.');
+-- Auction 6 (auctionid = 6, title: 'Zestaw narzędzi', price: 250, PLN, buyerid: 6)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(36, 6, 6, 6, 0, '2024-11-07 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(37, 6, 6, 6, 0, '2024-11-07 10:01:00', 'Czy przedmiot "Zestaw narzędzi" jest nadal dostępny?'),
+(38, 6, 6, 6, 1, '2024-11-07 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(39, 6, 6, 6, 0, '2024-11-07 10:03:00', 'Czy mógłby Pan sprzedać za 188 PLN?'),
+(40, 6, 6, 6, 1, '2024-11-07 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(41, 6, 6, 6, 1, '2024-11-07 10:05:00', 'Mogę zaproponować cenę 225 PLN.'),
+(42, 6, 6, 6, 0, '2024-11-07 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=39
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (39, 10, 4);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(16, 39, 4, 0, '2024-10-20 10:05:00', 'Dzień dobry, czy zestaw książek jest dostępny? Czy możliwa jest sprzedaż za 150 PLN?'),
-(16, 39, 4, 1, '2024-10-20 10:15:00', 'Witam, książki są dostępne, jednak cena 150 PLN jest zbyt niska. Proponuję 180 PLN.'),
-(16, 39, 4, 0, '2024-10-20 10:25:00', 'Dziękuję, akceptuję 180 PLN.');
+-- Auction 7 (auctionid = 7, title: 'Smartfon Samsung Galaxy', price: 300, PLN, buyerid: 7)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(43, 7, 7, 7, 0, '2024-11-04 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(44, 7, 7, 7, 0, '2024-11-04 10:01:00', 'Czy przedmiot "Smartfon Samsung Galaxy" jest nadal dostępny?'),
+(45, 7, 7, 7, 1, '2024-11-04 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(46, 7, 7, 7, 0, '2024-11-04 10:03:00', 'Czy mógłby Pan sprzedać za 225 PLN?'),
+(47, 7, 7, 7, 1, '2024-11-04 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(48, 7, 7, 7, 1, '2024-11-04 10:05:00', 'Mogę zaproponować cenę 270 PLN.'),
+(49, 7, 7, 7, 0, '2024-11-04 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=40 (oferta niezweryfikowana)
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (40, 3, 4);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(17, 40, 4, 0, '2024-10-21 10:05:00', 'Dzień dobry, czy aparat fotograficzny jest dostępny? Czy mogę kupić za 112.50 PLN?'),
-(17, 40, 4, 1, '2024-10-21 10:15:00', 'Witam, aparat jest dostępny, jednak cena 112.50 PLN jest zbyt niska. Proponuję 135 PLN.'),
-(17, 40, 4, 0, '2024-10-21 10:25:00', 'Dziękuję, akceptuję 135 PLN.');
+-- Auction 8 (auctionid = 8, title: 'Krzesło biurowe', price: 120, EUR, buyerid: 7)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(50, 8, 8, 7, 0, '2024-11-08 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(51, 8, 8, 7, 0, '2024-11-08 10:01:00', 'Czy przedmiot "Krzesło biurowe" jest nadal dostępny?'),
+(52, 8, 8, 7, 1, '2024-11-08 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(53, 8, 8, 7, 0, '2024-11-08 10:03:00', 'Czy mógłby Pan sprzedać za 90 EUR?'),
+(54, 8, 8, 7, 1, '2024-11-08 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(55, 8, 8, 7, 1, '2024-11-08 10:05:00', 'Mogę zaproponować cenę 108 EUR.'),
+(56, 8, 8, 7, 0, '2024-11-08 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=41 (oferta niezweryfikowana)
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (41, 5, 6);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(18, 41, 6, 0, '2024-10-22 10:05:00', 'Dzień dobry, czy konsola Nintendo 64 jest dostępna? Czy mogę kupić za 165 PLN?'),
-(18, 41, 6, 1, '2024-10-22 10:15:00', 'Witam, konsola jest dostępna, jednak cena 165 PLN jest zbyt niska. Proponuję 198 PLN.'),
-(18, 41, 6, 0, '2024-10-22 10:25:00', 'Dziękuję, zgadzam się na 198 PLN.');
+-- Auction 9 (auctionid = 9, title: 'Stary podręcznik matematyki', price: 80, PLN, buyerid: 8)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(57, 9, 9, 8, 0, '2024-11-05 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(58, 9, 9, 8, 0, '2024-11-05 10:01:00', 'Czy przedmiot "Stary podręcznik matematyki" jest nadal dostępny?'),
+(59, 9, 9, 8, 1, '2024-11-05 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(60, 9, 9, 8, 0, '2024-11-05 10:03:00', 'Czy mógłby Pan sprzedać za 60 PLN?'),
+(61, 9, 9, 8, 1, '2024-11-05 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(62, 9, 9, 8, 1, '2024-11-05 10:05:00', 'Mogę zaproponować cenę 72 PLN.'),
+(63, 9, 9, 8, 0, '2024-11-05 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
--- Aukcja id=42 (oferta niezweryfikowana)
-INSERT INTO message_link (auctionid, sellerid, buyerid) VALUES (42, 7, 8);
-INSERT INTO message (mlid, auctionid, buyerid, answer, date, description) VALUES
-(19, 42, 8, 0, '2024-10-23 10:05:00', 'Dzień dobry, czy zestaw mebli jest dostępny? Czy mogę kupić za 135 PLN?'),
-(19, 42, 8, 1, '2024-10-23 10:15:00', 'Witam, zestaw mebli jest dostępny, jednak cena 135 PLN jest zbyt niska. Proponuję 162 PLN.'),
-(19, 42, 8, 0, '2024-10-23 10:25:00', 'Dziękuję, akceptuję 162 PLN.');
+-- Auction 10 (auctionid = 10, title: 'Eleganckie spodnie', price: 150, PLN, buyerid: 8)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(64, 10, 10, 8, 0, '2024-11-09 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(65, 10, 10, 8, 0, '2024-11-09 10:01:00', 'Czy przedmiot "Eleganckie spodnie" jest nadal dostępny?'),
+(66, 10, 10, 8, 1, '2024-11-09 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(67, 10, 10, 8, 0, '2024-11-09 10:03:00', 'Czy mógłby Pan sprzedać za 113 PLN?'),
+(68, 10, 10, 8, 1, '2024-11-09 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(69, 10, 10, 8, 1, '2024-11-09 10:05:00', 'Mogę zaproponować cenę 135 PLN.'),
+(70, 10, 10, 8, 0, '2024-11-09 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 11 (auctionid = 11, title: 'Piłka nożna', price: 60, PLN, buyerid: 9)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(71, 11, 11, 9, 0, '2024-11-06 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(72, 11, 11, 9, 0, '2024-11-06 10:01:00', 'Czy przedmiot "Piłka nożna" jest nadal dostępny?'),
+(73, 11, 11, 9, 1, '2024-11-06 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(74, 11, 11, 9, 0, '2024-11-06 10:03:00', 'Czy mógłby Pan sprzedać za 45 PLN?'),
+(75, 11, 11, 9, 1, '2024-11-06 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(76, 11, 11, 9, 1, '2024-11-06 10:05:00', 'Mogę zaproponować cenę 54 PLN.'),
+(77, 11, 11, 9, 0, '2024-11-06 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 12 (auctionid = 12, title: 'Zestaw do majsterkowania', price: 180, PLN, buyerid: 9)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(78, 12, 12, 9, 0, '2024-11-10 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(79, 12, 12, 9, 0, '2024-11-10 10:01:00', 'Czy przedmiot "Zestaw do majsterkowania" jest nadal dostępny?'),
+(80, 12, 12, 9, 1, '2024-11-10 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(81, 12, 12, 9, 0, '2024-11-10 10:03:00', 'Czy mógłby Pan sprzedać za 135 PLN?'),
+(82, 12, 12, 9, 1, '2024-11-10 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(83, 12, 12, 9, 1, '2024-11-10 10:05:00', 'Mogę zaproponować cenę 162 PLN.'),
+(84, 12, 12, 9, 0, '2024-11-10 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 13 (auctionid = 13, title: 'Tablet Android', price: 220, PLN, buyerid: 10)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(85, 13, 13, 10, 0, '2024-11-07 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(86, 13, 13, 10, 0, '2024-11-07 10:01:00', 'Czy przedmiot "Tablet Android" jest nadal dostępny?'),
+(87, 13, 13, 10, 1, '2024-11-07 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(88, 13, 13, 10, 0, '2024-11-07 10:03:00', 'Czy mógłby Pan sprzedać za 165 PLN?'),
+(89, 13, 13, 10, 1, '2024-11-07 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(90, 13, 13, 10, 1, '2024-11-07 10:05:00', 'Mogę zaproponować cenę 198 PLN.'),
+(91, 13, 13, 10, 0, '2024-11-07 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 14 (auctionid = 14, title: 'Komiks superbohaterski', price: 50, PLN, buyerid: 10)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(92, 14, 14, 10, 0, '2024-11-11 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(93, 14, 14, 10, 0, '2024-11-11 10:01:00', 'Czy przedmiot "Komiks superbohaterski" jest nadal dostępny?'),
+(94, 14, 14, 10, 1, '2024-11-11 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(95, 14, 14, 10, 0, '2024-11-11 10:03:00', 'Czy mógłby Pan sprzedać za 38 PLN?'),
+(96, 14, 14, 10, 1, '2024-11-11 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(97, 14, 14, 10, 1, '2024-11-11 10:05:00', 'Mogę zaproponować cenę 45 PLN.'),
+(98, 14, 14, 10, 0, '2024-11-11 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 15 (auctionid = 15, title: 'Regał na książki', price: 100, PLN, buyerid: 3)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(99, 15, 15, 3, 0, '2024-11-08 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(100, 15, 15, 3, 0, '2024-11-08 10:01:00', 'Czy przedmiot "Regał na książki" jest nadal dostępny?'),
+(101, 15, 15, 3, 1, '2024-11-08 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(102, 15, 15, 3, 0, '2024-11-08 10:03:00', 'Czy mógłby Pan sprzedać za 75 PLN?'),
+(103, 15, 15, 3, 1, '2024-11-08 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(104, 15, 15, 3, 1, '2024-11-08 10:05:00', 'Mogę zaproponować cenę 90 PLN.'),
+(105, 15, 15, 3, 0, '2024-11-08 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 16 (auctionid = 16, title: 'Koszula elegancka', price: 90, PLN, buyerid: 3)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(106, 16, 16, 3, 0, '2024-11-12 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(107, 16, 16, 3, 0, '2024-11-12 10:01:00', 'Czy przedmiot "Koszula elegancka" jest nadal dostępny?'),
+(108, 16, 16, 3, 1, '2024-11-12 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(109, 16, 16, 3, 0, '2024-11-12 10:03:00', 'Czy mógłby Pan sprzedać za 68 PLN?'),
+(110, 16, 16, 3, 1, '2024-11-12 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(111, 16, 16, 3, 1, '2024-11-12 10:05:00', 'Mogę zaproponować cenę 81 PLN.'),
+(112, 16, 16, 3, 0, '2024-11-12 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 17 (auctionid = 17, title: 'Deskorolka', price: 70, PLN, buyerid: 4)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(113, 17, 17, 4, 0, '2024-11-10 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(114, 17, 17, 4, 0, '2024-11-10 10:01:00', 'Czy przedmiot "Deskorolka" jest nadal dostępny?'),
+(115, 17, 17, 4, 1, '2024-11-10 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(116, 17, 17, 4, 0, '2024-11-10 10:03:00', 'Czy mógłby Pan sprzedać za 53 PLN?'),
+(117, 17, 17, 4, 1, '2024-11-10 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(118, 17, 17, 4, 1, '2024-11-10 10:05:00', 'Mogę zaproponować cenę 63 PLN.'),
+(119, 17, 17, 4, 0, '2024-11-10 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 18 (auctionid = 18, title: 'Głośniki bluetooth', price: 130, PLN, buyerid: 5)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(120, 18, 18, 5, 0, '2024-11-11 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(121, 18, 18, 5, 0, '2024-11-11 10:01:00', 'Czy przedmiot "Głośniki bluetooth" jest nadal dostępny?'),
+(122, 18, 18, 5, 1, '2024-11-11 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(123, 18, 18, 5, 0, '2024-11-11 10:03:00', 'Czy mógłby Pan sprzedać za 98 PLN?'),
+(124, 18, 18, 5, 1, '2024-11-11 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(125, 18, 18, 5, 1, '2024-11-11 10:05:00', 'Mogę zaproponować cenę 117 PLN.'),
+(126, 18, 18, 5, 0, '2024-11-11 10:06:00', 'Dziękuję, przyjmuję ofertę.');
+
+-- Auction 19 (auctionid = 19, title: 'Kamera sportowa', price: 200, PLN, buyerid: 6)
+INSERT INTO message (id, mlid, auctionid, buyerid, answer, date, description) VALUES
+(127, 19, 19, 6, 0, '2024-11-12 10:00:00', 'Dzień dobry, jestem zainteresowany ofertą.'),
+(128, 19, 19, 6, 0, '2024-11-12 10:01:00', 'Czy przedmiot "Kamera sportowa" jest nadal dostępny?'),
+(129, 19, 19, 6, 1, '2024-11-12 10:02:00', 'Tak, przedmiot jest dostępny.'),
+(130, 19, 19, 6, 0, '2024-11-12 10:03:00', 'Czy mógłby Pan sprzedać za 150 PLN?'),
+(131, 19, 19, 6, 1, '2024-11-12 10:04:00', 'Przykro mi, ale zaproponowana cena jest zbyt niska.'),
+(132, 19, 19, 6, 1, '2024-11-12 10:05:00', 'Mogę zaproponować cenę 180 PLN.'),
+(133, 19, 19, 6, 0, '2024-11-12 10:06:00', 'Dziękuję, przyjmuję ofertę.');
 
 COMMIT;
