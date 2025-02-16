@@ -30,6 +30,7 @@ try {
                         <!--Wróć do widoku wszystkich aukcji-->
                     </button>
                 </div>
+                <br><br>
                 <div class="row col-md-11">
                     <div class="col-md-6">
                         <img class="fill" src="<?php echo '..\..\..\images\nofoto.jpg';?>" />
