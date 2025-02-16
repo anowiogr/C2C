@@ -32,7 +32,7 @@ $accountId = $_SESSION['logged']['account_id'];
 
             echo <<< TABLELISTA
                 <div class="row box p-3">
-                    <img class="aimg" src=__DIR__."/images/nofoto.jpg" />
+                    <img class="aimg" src="../../../images/nofoto.jpg" />
                     
                     <div class="box-text" >
                     
