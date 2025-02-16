@@ -38,7 +38,7 @@ $accountId = $_SESSION['logged']['account_id'];
                     
                          <div style="width: 50%; float: left; ">
                             <h3>
-                                <a class="atitle link-dark" style="text-decoration: none;" href="auction.php?auction_id=$auction[auctionid]">$auction[title]</a>
+                                <a class="atitle link-dark" style="text-decoration: none;" href="../auctions/auction.php?auction_id=$auction[auctionid]">$auction[title]</a>
                             </h3>
                          </div>
                          
